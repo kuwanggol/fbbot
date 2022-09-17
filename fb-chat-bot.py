@@ -490,8 +490,14 @@ class ChatBot(Client):
             elif ("hello" in msg or "hello" in msg or "hlo" in msg):
                 reply = "Hi"
                 sendMsg()
-            elif (msg == "hi"):
+            elif ("hi" in msg):
                 reply = "Hello"
+                sendMsg()
+            elif (msg == "Matutulog kana"):
+                reply = "Secret"
+                sendMsg()
+            elif (msg == "I love you"):
+                reply = "Secret"
                 sendMsg()
 
         except Exception as e:
