@@ -38,7 +38,24 @@ class ChatBot(Client):
                           thread_type=thread_type)
         def reactMsg(react):
             if (author_id != self.uid):
-                self.reactToMessage(message_object.uid, MessageReaction.react)
+                if react == "SMILE":
+                    self.reactToMessage(message_object.uid, MessageReaction.SMILE)
+                elif react == "WOW":
+                    self.reactToMessage(message_object.uid, MessageReaction.WOW)
+                elif react == "HEART":
+                    self.reactToMessage(message_object.uid, MessageReaction.HEART)
+                elif react == "LOVE":
+                    self.reactToMessage(message_object.uid, MessageReaction.LOVE)
+                elif react == "SAD":
+                    self.reactToMessage(message_object.uid, MessageReaction.SAD)
+                elif react == "ANGRY":
+                    self.reactToMessage(message_object.uid, MessageReaction.ANGRY)
+                elif react == "YES":
+                    self.reactToMessage(message_object.uid, MessageReaction.YES)
+                elif react == "NO":
+                    self.reactToMessage(message_object.uid, MessageReaction.NO)
+
+
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
