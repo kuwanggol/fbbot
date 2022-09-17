@@ -484,17 +484,15 @@ class ChatBot(Client):
             elif ("good morning" in msg):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
-            elif ("goodnight" or "good night" in msg or msg == "gn" in msg):
+            elif ("goodnight" in msg or "good night" in msg or msg == "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
-            elif ("hello" or "hello" in msg or "hlo" in msg):
+            elif ("hello" in msg or "hello" in msg or "hlo" in msg):
                 reply = "Hi"
                 sendMsg()
             elif (msg == "hi"):
                 reply = "Hello"
                 sendMsg()
-            else:
-                pass
 
         except Exception as e:
             print(e)
