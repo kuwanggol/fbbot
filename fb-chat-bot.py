@@ -404,7 +404,7 @@ class ChatBot(Client):
 
        
         try:
-            if("search pdf" in msg):
+            if("pdf" in msg):
                 searchFiles(self)
             elif("download youtube" in msg):
                 headers = {
@@ -431,7 +431,7 @@ class ChatBot(Client):
                 print("final", final_link)
                 self.sendRemoteFiles(
                     file_urls=final_link, message=None, thread_id=thread_id, thread_type=thread_type)
-            elif("search image" in msg):
+            elif(".image" in msg):
                 reply = "Searching..."
                 sendMsg()
                 imageSearch(self, msg)
@@ -468,7 +468,7 @@ class ChatBot(Client):
             elif ("search user" in msg or "search friend" in msg):
                 searchForUsers(self)
 
-            elif ("mute" in msg):
+            elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
                     reply = "muted 🔕"
@@ -502,8 +502,8 @@ class ChatBot(Client):
             elif ("ly" in msg or "love" in msg or "loveyou" in msg or "i love" in msg):
                 reply = "May jowa ako!"
                 sendMsg()
-            reply = msg;
-            sendMsg()
+            #reply = msg;
+            #sendMsg()
 
         except Exception as e:
             print(e)
