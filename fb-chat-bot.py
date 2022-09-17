@@ -478,65 +478,20 @@ class ChatBot(Client):
             elif("help" in msg):
                 reply = "Ano yon?"
                 sendMsg()
-            elif("clever" in msg):
-                reply = "Yes, i am clever. hope you will be clever soon."
-                sendMsg()
-            elif("crazy" in msg):
-                reply = "Anything wrong about that."
-                sendMsg()
-            elif ("are funny" in msg):
-                reply = "No. I am not. You are."
-                sendMsg()
-            elif ("marry me" in msg):
-                reply = "Yes, if you are nice and kind girl. But if you are boy RIP."
-                sendMsg()
-            elif ("you from" in msg):
-                reply = "I am from Nepal. Currently living in Kathmandu"
-                sendMsg()
-            elif ("you sure" in msg):
-                reply = "Yes. I'm sure."
-                sendMsg()
-            elif ("great" in msg):
-                reply = "Thanks!"
-                sendMsg()
-            elif ("no problem" in msg):
-                reply = "Okay😊🙂"
-                sendMsg()
-            elif ("thank you" in msg):
-                reply = "You're welcome😊🙂"
-                sendMsg()
-            elif ("thanks" in msg):
-                reply = "You're welcome🙂"
-                sendMsg()
-            elif ("well done" in msg):
-                reply = "Thanks🙂"
-                sendMsg()
-            elif ("wow" in msg):
-                reply = "🙂😊"
-                sendMsg()
-            elif ("wow" in msg):
-                reply = "🙂😊"
-                sendMsg()
             elif ("bye" in msg):
                 reply = "bye👋"
                 sendMsg()
             elif ("good morning" in msg):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
-            elif ("goodnight" in msg):
+            elif ("goodnight" or "good night" in msg or msg == "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
-            elif ("good night" in msg or msg == "gn"):
-                reply = "good night🌃🌙"
-                sendMsg()
-            elif ("hello" in msg):
-                reply = "Hi"
-                sendMsg()
-            elif ("hello" in msg or "hlo" in msg):
+            elif ("hello" or "hello" in msg or "hlo" in msg):
                 reply = "Hi"
                 sendMsg()
             elif (msg == "hi"):
-                reply = "Hello! How can I help you?"
+                reply = "Hello"
                 sendMsg()
 
         except Exception as e:
