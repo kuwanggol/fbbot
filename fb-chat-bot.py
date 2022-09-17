@@ -36,9 +36,9 @@ class ChatBot(Client):
             if (author_id != self.uid):
                 self.send(Message(text=reply), thread_id=thread_id,
                           thread_type=thread_type)
-        def reactMsg():
+        def reactMsg(react):
             if (author_id != self.uid):
-                self.reactToMessage(message_object.uid, MessageReaction.SMILE)
+                self.reactToMessage(message_object.uid, MessageReaction.react)
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
@@ -483,7 +483,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif ("haha" in msg):
-                reactMsg()
+                reactMsg("SMILE")
             elif ("busy" in msg):
                 reply = "Medyo."
                 sendMsg()
