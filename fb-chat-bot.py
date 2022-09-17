@@ -430,7 +430,7 @@ class ChatBot(Client):
                 print("final", final_link)
                 self.sendRemoteFiles(
                     file_urls=final_link, message=None, thread_id=thread_id, thread_type=thread_type)
-            elif(".image" in msg):
+            elif("!image" in msg):
                 imageSearch(self, msg)
 
             elif(".progsol" in msg):
