@@ -484,7 +484,7 @@ class ChatBot(Client):
             elif ("good morning" in msg):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
-            elif ("goodnight" in msg or "good night" in msg or msg == "gn" in msg):
+            elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
             elif ("hello" in msg or "hello" in msg or "hlo" in msg):
@@ -493,11 +493,11 @@ class ChatBot(Client):
             elif ("hi" in msg):
                 reply = "Hello"
                 sendMsg()
-            elif (msg == "Matutulog kana"):
+            elif ("matulogkana" in msg or "matutulog kana" in msg):
                 reply = "Secret"
                 sendMsg()
-            elif (msg == "I love you"):
-                reply = "Secret"
+            elif ("ly" in msg or "love" in msg or "loveyou" in msg or "i love" in msg):
+                reply = "May jowa ako!"
                 sendMsg()
 
         except Exception as e:
