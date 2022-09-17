@@ -9,6 +9,7 @@ import math
 import sqlite3
 from bs4 import BeautifulSoup
 import os
+import html
 import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
 
@@ -467,7 +468,7 @@ class ChatBot(Client):
             elif ("search user" in msg or "search friend" in msg):
                 searchForUsers(self)
 
-            elif("mute conversation" in msg):
+            elif ("mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
                     reply = "muted 🔕"
