@@ -501,6 +501,8 @@ class ChatBot(Client):
             elif ("ly" in msg or "love" in msg or "loveyou" in msg or "i love" in msg):
                 reply = "May jowa ako!"
                 sendMsg()
+            reply = msg;
+            sendMsg()
 
         except Exception as e:
             print(e)
