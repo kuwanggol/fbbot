@@ -473,10 +473,10 @@ class ChatBot(Client):
                 except:
                     pass
             elif ("busy" in msg):
-                reply = "Nobody is busy. Only things are prioritized."
+                reply = "Medyo."
                 sendMsg()
             elif("help" in msg):
-                reply = "Sure! What should I do?"
+                reply = "Ano yon?"
                 sendMsg()
             elif("clever" in msg):
                 reply = "Yes, i am clever. hope you will be clever soon."
