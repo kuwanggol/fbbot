@@ -403,7 +403,7 @@ class ChatBot(Client):
 
        
         try:
-            if("search pdf" in msg):
+            if("/pdf" in msg):
                 searchFiles(self)
             elif("download youtube" in msg):
                 headers = {
@@ -430,30 +430,30 @@ class ChatBot(Client):
                 print("final", final_link)
                 self.sendRemoteFiles(
                     file_urls=final_link, message=None, thread_id=thread_id, thread_type=thread_type)
-            elif("search image" in msg):
+            elif("/image" in msg):
                 imageSearch(self, msg)
 
-            elif("program to" in msg):
+            elif("/progsol" in msg):
                 programming_solution(self, msg)
             elif("translate" in msg):
                 reply = translator(self, msg, msg.split()[-1])
 
                 sendQuery()
-            elif "weather of" in msg:
+            elif "/weather" in msg:
                 indx = msg.index("weather of")
                 query = msg[indx+11:]
                 reply = weather(query)
                 sendQuery()
-            elif "corona of" in msg:
+            elif "/corona" in msg:
                 corona_details(msg.split()[2])
-            elif ("calculus" in msg):
+            elif ("/calculus" in msg):
                 stepWiseCalculus(" ".join(msg.split(" ")[1:]))
-            elif ("algebra" in msg):
+            elif ("/algebra" in msg):
                 stepWiseAlgebra(" ".join(msg.split(" ")[1:]))
-            elif ("query" in msg):
+            elif ("/query" in msg):
                 stepWiseQueries(" ".join(msg.split(" ")[1:]))
 
-            elif "find" in msg or "solve" in msg or "evaluate" in msg or "calculate" in msg or "value" in msg or "convert" in msg or "simplify" in msg or "generate" in msg:
+            elif "/find" in msg or "/solve" in msg or "/evaluate" in msg or "/calculate" in msg or "/value" in msg or "/convert" in msg or "/simplify" in msg or "/generate" in msg:
                 app_id = "Y98QH3-24PWX83VGA"
                 client = wolframalpha.Client(app_id)
                 query = msg.split()[1:]
@@ -462,10 +462,10 @@ class ChatBot(Client):
                 reply = f'Answer: {answer.replace("sqrt", "√")}'
                 sendQuery()
 
-            elif ("search user" in msg or "search friend" in msg):
+            elif ("/search" in msg):
                 searchForUsers(self)
 
-            elif("mute conversation" in msg):
+            elif("/mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
                     reply = "muted 🔕"
