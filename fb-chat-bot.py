@@ -443,7 +443,7 @@ class ChatBot(Client):
                 reply = translator(self, msg, msg.split()[-1])
 
                 sendQuery()
-            elif ".weather of" in msg:
+            elif ".weather" in msg:
                 indx = msg.index("weather of")
                 query = msg[indx+11:]
                 reply = weather(query)
@@ -477,7 +477,7 @@ class ChatBot(Client):
                 except:
                     pass
             elif (".help" in msg):
-                reply = ".image - search image online.\nCredit: Joross Esguerra"
+                reply = ".image - search image online.\nweather {county/city}\n.mute - mute conversation\n\nCredit: Joross Esguerra"
                 sendMsg()
             elif ("busy" in msg):
                 reply = "Medyo."
