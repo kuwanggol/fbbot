@@ -432,9 +432,10 @@ class ChatBot(Client):
                 self.sendRemoteFiles(
                     file_urls=final_link, message=None, thread_id=thread_id, thread_type=thread_type)
             elif(".image" in msg):
-                reply = "Searching..."
-                sendMsg()
-                imageSearch(self, msg)
+                if "credit:" not in msg:
+                    reply = "Searching..."
+                    sendMsg()
+                    imageSearch(self, msg)
 
             elif(".progsol" in msg):
                 programming_solution(self, msg)
