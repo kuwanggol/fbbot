@@ -476,7 +476,7 @@ class ChatBot(Client):
                 except:
                     pass
             elif (".help" in msg):
-                reply = ".amp;image - search image online.\nCredit: Joross Esguerra"
+                reply = ".image - search image online.\nCredit: Joross Esguerra"
                 sendMsg()
             elif ("busy" in msg):
                 reply = "Medyo."
