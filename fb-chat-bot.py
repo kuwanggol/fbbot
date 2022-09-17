@@ -465,7 +465,7 @@ class ChatBot(Client):
                 reply = f'Answer: {answer.replace("sqrt", "√")}'
                 sendQuery()
 
-            elif (".search user" in msg or ".search friend" in msg):
+            elif (".su" in msg):
                 searchForUsers(self)
 
             elif (".mute" in msg):
@@ -475,11 +475,11 @@ class ChatBot(Client):
                     sendQuery()
                 except:
                     pass
+            elif (".help" in msg):
+                reply = ".image - search image online.\nCredit: Joross Esguerra"
+                sendMsg()
             elif ("busy" in msg):
                 reply = "Medyo."
-                sendMsg()
-            elif("help" in msg):
-                reply = "Ano yon?"
                 sendMsg()
             elif ("bye" in msg):
                 reply = "bye👋"
