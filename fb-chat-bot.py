@@ -493,6 +493,8 @@ class ChatBot(Client):
             elif (msg == "hi"):
                 reply = "Hello"
                 sendMsg()
+            else:
+                pass
 
         except Exception as e:
             print(e)
