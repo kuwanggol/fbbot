@@ -601,6 +601,8 @@ class ChatBot(Client):
                 ts=ts,
                 msg=delta,
             )
+    _parseDelta(self, "addedParticipants")
+    _parseDelta(self, "leftParticipantFbId")
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
