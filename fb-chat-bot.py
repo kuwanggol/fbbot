@@ -590,7 +590,7 @@ class ChatBot(Client):
             self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
             self.addUsersToGroup(removed_id, thread_id=thread_id)
             #reply = "Bawal mag leave ✌️😎"
-            reply = str(metadata)
+            reply = str(delta_class)
             try:
                 self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=ThreadType.USER)
