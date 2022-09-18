@@ -57,7 +57,7 @@ class ChatBot(Client):
 
         
         def unsendMsg():
-            data = {"message_id": umid}
+            data = {"message_id": message_object.uid}
             j = self._payload_post("/messaging/unsend_message/?dpr=1", data)
 
         def sendQuery():
@@ -502,8 +502,7 @@ class ChatBot(Client):
             elif (".help" in msg):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
-            elif (".unsent" in msg):
-                umid = message_object.uid
+            elif (".unsent" == msg):
                 unsendMsg()
             elif ("haha" in msg):
                 reactMsg("SMILE")
