@@ -422,10 +422,10 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                ##reply = conSTR(msg,".say")
+                reply = conSTR(msg,".say")
                 ##reply = texttospeech(mytext)
-                ##sendMsg()
-                sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
+                sendMsg()
+                sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=None, thread_type=thread_type)
                 reply = "Working"
                 sendMsg()
 
