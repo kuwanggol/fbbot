@@ -554,7 +554,7 @@ class ChatBot(Client):
 
             except:
                 pass
-        def _parseDelta(self, delta):
+    def _parseDelta(self, delta):
         def getThreadIdAndThreadType(msg_metadata):
             """Return a tuple consisting of thread ID and thread type."""
             id_thread = None
