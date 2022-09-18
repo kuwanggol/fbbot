@@ -13,12 +13,6 @@ import html
 import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
 
-def conSTR(subject,query):
-  indx = msg.index(query)
-  lengh = len(query)
-  print(indx)
-  query = msg[indx+lengh:]
-  return(query)
 
 class ChatBot(Client):
 
@@ -91,6 +85,13 @@ class ChatBot(Client):
                 conn.close()
             except:
                 pass
+                
+        def conSTR(subject,query):
+            indx = msg.index(query)
+            lengh = len(query)
+            print(indx)
+            query = msg[indx+lengh:]
+            return(query)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
