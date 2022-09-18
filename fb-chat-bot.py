@@ -85,7 +85,7 @@ class ChatBot(Client):
                 conn.close()
             except:
                 pass
-
+                
         def conSTR(subject,query):
             indx = msg.index(query)
             lengh = len(query)
@@ -94,7 +94,6 @@ class ChatBot(Client):
             return(query)
 
         def weather(city):
-            city = conSTR(city,".weather")
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
             json_data = requests.get(url).json()
@@ -383,7 +382,9 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                reply = weather(msg)
+                indx = msg.index(".weather")
+                query = msg[indx+9:]
+                reply = weather(query)
                 sendQuery()
 
             elif (".calculus" in msg):
