@@ -592,7 +592,7 @@ class ChatBot(Client):
             #reply = "Bawal mag leave ✌️😎"
             reply = str(delta_type)
             self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=type_thread)
+                  thread_type=getThreadIdAndThreadType(msg_metadata)["type_thread"])
             
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
