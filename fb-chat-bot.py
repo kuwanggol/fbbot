@@ -380,7 +380,7 @@ class ChatBot(Client):
                 sendQuery()
             elif ".weather" in msg:
                 indx = msg.index(".weather")
-                query = msg[indx+11:]
+                query = msg[indx+9:]
                 ##reply = weather(query)
                 reply = query
                 sendQuery()
