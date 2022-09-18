@@ -489,7 +489,7 @@ class ChatBot(Client):
                 sendQuery()
 
             elif (".su" in msg):
-                name = msg.replace(msg.split(" ")[0],msg)
+                name = msg.replace(".su",msg)
                 searchForUsers(self,name)
 
             elif (".mute" in msg):
