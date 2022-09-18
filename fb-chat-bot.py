@@ -555,17 +555,12 @@ class ChatBot(Client):
             except:
                 pass
     def _parseDelta(self, delta):
-        def getThreadIdAndThreadType(msg_metadata):
-            """Return a tuple consisting of thread ID and thread type."""
-            id_thread = None
-            type_thread = None
-            if "threadFbId" in msg_metadata["threadKey"]:
-                id_thread = str(msg_metadata["threadKey"]["threadFbId"])
-                type_thread = ThreadType.GROUP
-            elif "otherUserFbId" in msg_metadata["threadKey"]:
-                id_thread = str(msg_metadata["threadKey"]["otherUserFbId"])
-                type_thread = ThreadType.USER
-            return id_thread, type_thread
+        if "threadFbId" in msg_metadata["threadKey"]:
+            id_thread = str(msg_metadata["threadKey"]["threadFbId"])
+            type_thread = ThreadType.GROUP
+        elif "otherUserFbId" in msg_metadata["threadKey"]:
+            id_thread = str(msg_metadata["threadKey"]["otherUserFbId"])
+            type_thread = ThreadType.USER
 
         delta_type = delta.get("type")
         delta_class = delta.get("class")
@@ -589,14 +584,13 @@ class ChatBot(Client):
 
             self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
             self.addUsersToGroup(removed_id, thread_id=thread_id)
-            #reply = "Bawal mag leave ✌️😎"
-            reply = str(delta_type)
+            reply = "Bawal mag leave ✌️😎"
             try:
                 self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=ThreadType.USER)
+                  thread_type=type_thread)
             except:
                 self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=ThreadType.GROUP)
+                  thread_type=type_thread)
 
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
