@@ -554,9 +554,10 @@ class ChatBot(Client):
 
             except:
                 pass
-    def onFriendRequest(self, from_id=None, msg=None):
+    def onFriendRequest(self, from_id=from_id, msg=None):
         log.info("Friend request from {}".format(from_id))
         print("Friend request from {}".format(from_id))
+        
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
