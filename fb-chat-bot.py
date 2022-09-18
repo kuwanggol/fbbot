@@ -417,7 +417,7 @@ class ChatBot(Client):
                 searchForUsers(self)
             elif (".say" in msg):
                 mytext = conSTR(msg,".say")
-                reply = texttospeech(mytext)
+                reply = str(texttospeech(mytext))
                 sendMsg()
 
             elif (".mute" in msg):
