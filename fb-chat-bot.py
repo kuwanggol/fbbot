@@ -426,7 +426,7 @@ class ChatBot(Client):
                 mytext = conSTR(msg,".say")
                 reply = texttospeech(mytext)
                 sendMsg()
-                sendLocalVoiceClips(self,"welcomuwwwue.mp3")
+                sendLocalVoiceClips("welcomuwwwue.mp3", message=None, thread_id=None, thread_type=ThreadType.USER)
 
             elif (".mute" in msg):
                 try:
