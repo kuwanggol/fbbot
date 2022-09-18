@@ -42,7 +42,7 @@ class ChatBot(Client):
         def reactMsg(react):
             if (author_id != self.uid):
                 if react == "SMILE":
-                    self.reactToMessage(message_object.uid, MessageReaction.SMILE)
+                    reactToMessage(message_object.uid, MessageReaction.SMILE)
                 elif react == "WOW":
                     self.reactToMessage(message_object.uid, MessageReaction.WOW)
                 elif react == "HEART":
