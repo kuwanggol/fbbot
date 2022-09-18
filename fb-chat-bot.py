@@ -428,8 +428,8 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                mytext = conSTR(msg,".say")
-                reply = texttospeech(mytext)
+                reply = conSTR(msg,".say")
+                ##reply = texttospeech(mytext)
                 sendMsg()
                 ##sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3")
 
