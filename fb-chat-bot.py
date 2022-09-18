@@ -434,6 +434,9 @@ class ChatBot(Client):
                     sendQuery()
                 except:
                     pass
+            elif (".changenn" in msg):
+                msg = conSTR(msg,".changenn")
+                self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
             elif (".help" in msg):
                 reply = ".image - search image online.\n.weather - {county/city}\n.say - convert text to speech.\n.solve - basic math calculation.\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
@@ -467,10 +470,9 @@ class ChatBot(Client):
             elif ("test" == msg):
                 reply = message_object.uid;
                 sendMsg()
-            elif (".changenn" in msg):
-                msg = conSTR(msg,".changenn")
-                self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
-
+            elif ("panget" in msg and "bot" in msg):
+                reply = "Pake mo ba? 😒😒"
+                sendMsg()
             #reply = msg;
             #sendMsg()
 
