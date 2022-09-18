@@ -59,6 +59,7 @@ class ChatBot(Client):
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
 
         def sendLocalVoiceClips(self, clip_paths, message=None, thread_id=None, thread_type=ThreadType.USER):
+            print(clip_paths)
             clip_paths = require_list(clip_paths)
             with get_files_from_paths(clip_paths) as x:
                 files = self._upload(x, voice_clip=True)
