@@ -102,6 +102,7 @@ class ChatBot(Client):
             humidity = json_data["main"]["humidity"]
             wind_speed = json_data["wind"]["speed"]
             reply = f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res
+            reply = "Testing"
             if (author_id != self.uid):
                 self.send(Message(text=reply), thread_id=thread_id,
                           thread_type=thread_type)
