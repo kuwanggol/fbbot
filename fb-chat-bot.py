@@ -572,12 +572,12 @@ class ChatBot(Client):
         reply = "You just removed reaction from the message."
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
-    def onPeopleAdded(self,mid=None,added_ids=None,author_id=None,thread_id=None,ts=None,msg=None,thread_type=thread_type):
+    def onPeopleAdded(self,mid=None,added_ids=None,author_id=None,thread_id=None,ts=None,msg=None, **kwargs):
         reply = "{} added: {} in {}".format(author_id, ", ".join(added_ids), thread_id)
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
 
-    def onPersonRemoved(self,mid=None,removed_id=None,author_id=None,thread_id=None,ts=None,thread_type=thread_type):
+    def onPersonRemoved(self,mid=None,removed_id=None,author_id=None,thread_id=None,ts=None, **kwargs):
         reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
