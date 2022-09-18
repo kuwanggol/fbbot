@@ -505,7 +505,7 @@ class ChatBot(Client):
                 sendMsg()
             elif (".unsend" == msg):
                 unsend(self,message_object.uid)
-            elif ("haha" in msg):
+            elif ("haha" in msg or "lol" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
                 reply = "Medyo."
