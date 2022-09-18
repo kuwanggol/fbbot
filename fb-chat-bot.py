@@ -85,7 +85,7 @@ class ChatBot(Client):
                 conn.close()
             except:
                 pass
-                
+
         def conSTR(subject,query):
             indx = msg.index(query)
             lengh = len(query)
@@ -405,7 +405,10 @@ class ChatBot(Client):
 
             elif (".su" in msg):
                 searchForUsers(self)
-
+            elif (".say" in msg):
+                ##reply = "Ok"
+                reply = conSTR(msg,".say")
+                sendMsg()
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
