@@ -366,7 +366,7 @@ class ChatBot(Client):
 
        
         try:
-            if(".image" in msg):
+            if("search image" in msg):
                 imageSearch(self, msg)
 
             elif(".progsol" in msg):
