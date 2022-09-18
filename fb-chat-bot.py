@@ -381,8 +381,7 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                reply = ".weather"
-                reply = reply.replace(".weather","changed")
+                reply = msg.replace(".weather","changed")
                 sendMsg()
 
             elif (".calculus" in msg):
