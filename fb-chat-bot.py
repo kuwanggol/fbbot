@@ -64,9 +64,8 @@ class ChatBot(Client):
         ##        files = self._upload(x, voice_clip=True)
         ##    return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
 
-        def unsend(self, mid):
-            data = {"message_id": mid}
-            j = self._payload_post("/messaging/unsend_message/?dpr=1", data)
+        def unsend(mid):
+            self.unsend(mid)
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
@@ -445,7 +444,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                unsend(self,message_object.uid)
+                unsend(message_object.uid)
             elif ("haha" in msg or "lol" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
