@@ -448,7 +448,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                self.unsend(mid="mid.$gABPem7EkRUWJgUAWdmDT_rOHKv25")
+                self.unsend(mid="mid.$gABPem7EkRUWJgTwSpGDT_bKQ4XsO")
                 reply = "Di mo kita 😆"
                 sendMsg()
             elif ("haha" in msg or "lol" in msg):
