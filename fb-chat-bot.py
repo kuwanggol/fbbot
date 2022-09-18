@@ -555,7 +555,7 @@ class ChatBot(Client):
             except:
                 pass
     print("This gonna work")
-    def onFriendRequest(self, from_id=from_id, msg=None):
+    def onFriendRequest(self, from_id=None, msg=None):
         log.info("Friend request from {}".format(from_id))
         print("Friend request from {}".format(from_id))
 
