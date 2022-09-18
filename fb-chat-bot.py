@@ -105,7 +105,9 @@ class ChatBot(Client):
                             string.ascii_lowercase, k=10))
             mikey = res + ".mp3"
             myobj.save(mikey)
-            return(mikey)
+            ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
+            self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type)
+
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -423,12 +425,7 @@ class ChatBot(Client):
                 searchForUsers(self)
             elif (".say" in msg):
                 mytext = conSTR(msg,".say")
-                filen = texttospeech(mytext)
-                ##reply = texttospeech(mytext)
-                ##sendMsg()
-                ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
-                self.sendLocalVoiceClips(filen, message=None, thread_id=thread_id, thread_type=thread_type)
-
+                texttospeech(mytext)
 
             elif (".mute" in msg):
                 try:
