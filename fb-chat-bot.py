@@ -225,6 +225,11 @@ class ChatBot(Client):
 
             except Exception as e:
                 pass
+                
+        def sendRemoteVoiceClips(self, clip_urls, message=None, thread_id=None, thread_type=ThreadType.USER):
+            clip_urls = require_list(clip_urls)
+            files = self._upload(get_files_from_urls(clip_urls), voice_clip=True)
+            return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
 
         def stepWiseQueries(query):
             query = query.replace("+", "%2B")
@@ -426,7 +431,7 @@ class ChatBot(Client):
                 ##mytext = conSTR(msg,".say")
                 ##reply = texttospeech(mytext)
                 ##sendMsg()
-                sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3", message="Try this one", thread_id=None, thread_type=ThreadType.USER)
+                sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3")
 
             elif (".mute" in msg):
                 try:
