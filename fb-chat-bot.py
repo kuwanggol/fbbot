@@ -108,6 +108,13 @@ class ChatBot(Client):
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type)
 
+        def onPeopleAdded(mid=message_object.uid, added_ids=None, author_id=message_object.author, thread_id=thread_id, ts=None, msg=None):
+            reply = "{} added: {} in {}".format(author_id, ", ".join(added_ids), thread_id)
+            self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
+
+        def onPersonRemoved(mid=message_object.uid, removed_id=None, author_id=message_object.author, thread_id=thread_id, ts=None, msg=None):
+            reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
+            self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -572,15 +579,7 @@ class ChatBot(Client):
         reply = "You just removed reaction from the message."
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
-    def onPeopleAdded(mid=message_object.uid, added_ids=None, author_id=message_object.author, thread_id=None, ts=None, msg=None):
-        reply = "{} added: {} in {}".format(author_id, ", ".join(added_ids), thread_id)
-        self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=thread_type)
 
-    def onPersonRemoved(mid=message_object.uid, removed_id=None, author_id=message_object.author, thread_id=None, ts=None, msg=None):
-        reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
-        self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=thread_type)
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
         reply = "You just started a call 📞🎥"
