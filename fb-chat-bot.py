@@ -590,7 +590,7 @@ class ChatBot(Client):
                   thread_type=thread_type)
 
 
-cookies = {
+###cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
     "fr": "0NxayJuewRHQ30OX3.AWVJwIYNh0Tt8AJv6kSwDamhkoM.BiMrVd.Iu.AAA.0.0.BiMtVZ.AWXMVaiHrpQ",
     "c_user": "100085464057979",
