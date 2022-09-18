@@ -25,7 +25,7 @@ import random, string
 #
 
 class ChatBot(Client):
-    def _parseDelta(self, delta):
+    def _parseDelto(self, delta):
         delta_type = delta.get("type")
         delta_class = delta.get("class")
         metadata = delta.get("messageMetadata")
@@ -513,7 +513,7 @@ class ChatBot(Client):
             print(e)
 
         self.markAsDelivered(author_id, thread_id)
-    
+
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
 
         if(author_id == self.uid):
