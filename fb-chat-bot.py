@@ -270,7 +270,7 @@ class ChatBot(Client):
                           thread_type=thread_type)
 
         try:
-            def searchForUsers(self, name=" ".join(msg.split()[:4]), limit=10):
+            def searchForUsers(self, name, limit=10):
                 try:
                     limit = int(msg.split()[4])
                 except:
@@ -489,7 +489,8 @@ class ChatBot(Client):
                 sendQuery()
 
             elif (".su" in msg):
-                searchForUsers(self)
+                name = msg.replace(msg.split(" ")[0],msg)
+                searchForUsers(self,name)
 
             elif (".mute" in msg):
                 try:
