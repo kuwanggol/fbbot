@@ -554,11 +554,6 @@ class ChatBot(Client):
 
             except:
                 pass
-    print("This gonna work")
-    def onFriendRequest(self, from_id=None, msg=None):
-        log.info("Friend request from {}".format(from_id))
-        print("Friend request from {}".format(from_id))
-
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
@@ -594,7 +589,7 @@ class ChatBot(Client):
         reply = "Bye 👋🙋‍♂️"
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
-
+    _parseDelta(self, "addedParticipants")
     def onUserJoinedCall(mid=None, joined_id=None, is_video_call=None,
                          thread_id=None, thread_type=None, **kwargs):
         reply = f"New user with user_id {joined_id} has joined a call"
