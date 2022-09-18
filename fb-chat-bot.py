@@ -565,8 +565,6 @@ class ChatBot(Client):
             id_thread = str(metadata["threadKey"]["otherUserFbId"])
             type_thread = ThreadType.USER
 
-
-
         if metadata:
             mid = metadata["messageId"]
             author_id = str(metadata["actorFbId"])
@@ -586,11 +584,7 @@ class ChatBot(Client):
             self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
             self.addUsersToGroup(removed_id, thread_id=thread_id)
             reply = "Bawal mag leave ✌️😎"
-            try:
-                self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=type_thread)
-            except:
-                self.send(Message(text=reply), thread_id=thread_id,
+            self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=type_thread)
 
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
