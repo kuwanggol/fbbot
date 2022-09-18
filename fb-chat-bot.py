@@ -108,11 +108,11 @@ class ChatBot(Client):
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type)
 
-        def onPeopleAdded(mid=message_object.uid, added_ids=None, author_id=message_object.author, thread_id=thread_id, ts=None, msg=None):
+        def onPeopleAdded(mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
             reply = "{} added: {} in {}".format(author_id, ", ".join(added_ids), thread_id)
             self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
-        def onPersonRemoved(mid=message_object.uid, removed_id=None, author_id=message_object.author, thread_id=thread_id, ts=None, msg=None):
+        def onPersonRemoved(mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
             reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
             self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
