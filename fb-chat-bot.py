@@ -12,6 +12,10 @@ import os
 import html
 import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
+from gtts import gTTS
+import random
+
+
 
 
 class ChatBot(Client):
@@ -92,6 +96,12 @@ class ChatBot(Client):
             print(indx)
             query = msg[indx+lengh:]
             return(query)
+        def texttospeech(mytext):
+            language = 'tl'
+            myobj = gTTS(text=mytext, lang=language, slow=False)
+            randintt = random.randint(1,10000) + ".mp3"
+            myobj.save(randintt)
+            retrun(randintt)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -406,8 +416,8 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                ##reply = "Ok"
-                reply = conSTR(msg,".say")
+                mytext = conSTR(msg,".say")
+                reply = texttospeech(mytext)
                 sendMsg()
             elif (".mute" in msg):
                 try:
