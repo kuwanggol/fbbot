@@ -87,7 +87,7 @@ class ChatBot(Client):
             except:
                 pass
 
-        def weather(city):
+        def weather(self,city=msg.replace(".weather","")):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
             json_data = requests.get(url).json()
@@ -380,7 +380,7 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                weather(msg.replace(".weather",""))
+                weather(self)
 
             elif (".calculus" in msg):
                 stepWiseCalculus(" ".join(msg.split(" ")[1:]))
