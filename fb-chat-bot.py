@@ -472,6 +472,8 @@ class ChatBot(Client):
             elif (".changenn" in msg):
                 msg = conSTR(msg,".changenn")
                 self.changeNickname(msg, user_id=100078868689291, thread_id=thread_id, thread_type=thread_type)
+                reply = joined_id
+                sendMsg()
 
             #reply = msg;
             #sendMsg()
