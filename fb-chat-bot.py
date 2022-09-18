@@ -227,6 +227,7 @@ class ChatBot(Client):
                 pass
 
         def sendRemoteVoiceClips(self, clip_urls, message=None, thread_id=None, thread_type=ThreadType.USER):
+            clip_urls = require_list(clip_urls)
             files = self._upload(get_files_from_urls(clip_urls), voice_clip=True)
             return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
 
@@ -427,10 +428,10 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                ##mytext = conSTR(msg,".say")
-                ##reply = texttospeech(mytext)
-                ##sendMsg()
-                sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3")
+                mytext = conSTR(msg,".say")
+                reply = texttospeech(mytext)
+                sendMsg()
+                ##sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3")
 
             elif (".mute" in msg):
                 try:
@@ -440,7 +441,7 @@ class ChatBot(Client):
                 except:
                     pass
             elif (".help" in msg):
-                reply = ".image - search image online.\n.weather {county/city}\n.translate - {text} to {ne}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
+                reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
                 unsend(self,message_object.uid)
