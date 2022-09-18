@@ -101,9 +101,10 @@ class ChatBot(Client):
             pressure = json_data["main"]["pressure"]
             humidity = json_data["main"]["humidity"]
             wind_speed = json_data["wind"]["speed"]
-
-            return(
-                f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res)
+            reply = f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res
+            if (author_id != self.uid):
+                self.send(Message(text=reply), thread_id=thread_id,
+                          thread_type=thread_type)
 
         def stepWiseCalculus(query):
             query = query.replace("+", "%2B")
@@ -379,9 +380,8 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                query = msg.replace(".weather","")
-                reply = weather(query)
-                sendMsg()
+                weather(msg.replace(".weather",""))
+
             elif (".calculus" in msg):
                 stepWiseCalculus(" ".join(msg.split(" ")[1:]))
             elif (".algebra" in msg):
