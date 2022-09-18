@@ -423,9 +423,9 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                mytext = conSTR(msg,".say")
-                reply = texttospeech(mytext)
-                sendMsg()
+                ##mytext = conSTR(msg,".say")
+                ##reply = texttospeech(mytext)
+                ##sendMsg()
                 sendLocalVoiceClips("welcomuwwwue.mp3", message=None, thread_id=None, thread_type=ThreadType.USER)
 
             elif (".mute" in msg):
