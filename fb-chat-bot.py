@@ -101,7 +101,7 @@ class ChatBot(Client):
             myobj = gTTS(text=mytext, lang=language, slow=False)
             randintt = random.randint(1,10000) + ".mp3"
             myobj.save(randintt)
-            retrun(randintt)
+            return(randintt)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -419,6 +419,7 @@ class ChatBot(Client):
                 mytext = conSTR(msg,".say")
                 reply = texttospeech(mytext)
                 sendMsg()
+
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
