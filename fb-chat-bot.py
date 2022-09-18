@@ -85,7 +85,7 @@ class ChatBot(Client):
                 conn.close()
             except:
                 pass
-                
+
         def conSTR(subject,query):
             indx = msg.index(query)
             lengh = len(query)
@@ -382,9 +382,7 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                indx = msg.index(".weather")
-                query = msg[indx+9:]
-                reply = weather(query)
+                reply = weather(conSTR(msg,".weather"))
                 sendQuery()
 
             elif (".calculus" in msg):
@@ -567,9 +565,9 @@ class ChatBot(Client):
 cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
     "fr": "0NxayJuewRHQ30OX3.AWVJwIYNh0Tt8AJv6kSwDamhkoM.BiMrVd.Iu.AAA.0.0.BiMtVZ.AWXMVaiHrpQ",
-    "c_user": "100078868689291",
+    "c_user": "100085464057979",
     "datr": "xasyYs51GC0Lq5H5lvXTl5zA",
-    "xs": "34%3AcaaIespaOPdRXQ%3A2%3A1663471720%3A-1%3A7776"
+    "xs": "36%3AQdQVqOIXiJ3m9Q%3A2%3A1663412689%3A-1%3A-1"
 }
 
 
