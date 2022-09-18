@@ -589,15 +589,14 @@ class ChatBot(Client):
 
             self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
             self.addUsersToGroup(removed_id, thread_id=thread_id)
-            reply = "Bawal mag leave ✌️😎"
+            #reply = "Bawal mag leave ✌️😎"
+            reply = str(metadata)
             try:
                 self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=ThreadType.USER)
             except:
                 self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=ThreadType.GROUP)
-        else:
-            pass
 
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
