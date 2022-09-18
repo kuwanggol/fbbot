@@ -87,38 +87,6 @@ class ChatBot(Client):
             except:
                 pass
 
-        def corona_details(country_name):
-            from datetime import date, timedelta
-            today = date.today()
-            today = date.today()
-            yesterday = today - timedelta(days=1)
-
-            url = "https://covid-193.p.rapidapi.com/history"
-
-            querystring = {"country": country_name, "day": yesterday}
-
-            headers = {
-                'x-rapidapi-key': "8cd2881885msh9933f89c5aa2186p1d8076jsn7303d42b3c66",
-                'x-rapidapi-host': "covid-193.p.rapidapi.com"
-            }
-
-            response = requests.request(
-                "GET", url, headers=headers, params=querystring)
-            data_str = response.text
-
-            data = eval(data_str.replace("null", "None"))
-            country = data["response"][0]["country"]
-            new_cases = data["response"][0]["cases"]["new"]
-            active_cases = data["response"][0]["cases"]["active"]
-            total_cases = data["response"][0]["cases"]["total"]
-            critical_cases = data["response"][0]["cases"]["critical"]
-            total_deaths = data["response"][0]["deaths"]["total"]
-            total_recovered = data["response"][0]["cases"]["recovered"]
-            new_deaths = data["response"][0]["deaths"]["new"]
-            reply = f'new cases: {new_cases}\n new_cases1 = {new_cases.replace("+", "")}\nnew_deaths1 = {new_deaths.replace("+", "")}\nactive cases: {active_cases}\nnew deaths: {new_deaths} total deaths: {total_deaths} \ncritical cases: {critical_cases}\ntotal cases: {total_cases}\ntotal recovered: {total_recovered}'
-            self.send(Message(text=reply), thread_id=thread_id,
-                      thread_type=thread_type)
-
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
@@ -276,7 +244,7 @@ class ChatBot(Client):
                     limit = int(msg.split()[4])
                 except:
                     limit = 10
-                name = name.replace(".su",name)
+                name = name.replace(".su","")
                 params = {"search": name, "limit": limit}
                 (j,) = self.graphql_requests(
                     _graphql.from_query(_graphql.SEARCH_USER, params))
@@ -396,66 +364,9 @@ class ChatBot(Client):
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 executor.map(multiThreadImg, image_urls)
 
-        def searchFiles(self):
-            query = " ".join(msg.split()[2:])
-            file_urls = []
-            url = "https://filepursuit.p.rapidapi.com/"
-
-            querystring = {"q": query, "filetype": msg.split()[1]}
-
-            headers = {
-                'x-rapidapi-host': "filepursuit.p.rapidapi.com",
-                'x-rapidapi-key': "8cd2881885msh9933f89c5aa2186p1d8076jsn7303d42b3c66"
-            }
-
-            response = requests.request(
-                "GET", url, headers=headers, params=querystring)
-
-            response = json.loads(response.text)
-            file_contents = response["files_found"]
-            try:
-                for file in random.sample(file_contents, 10):
-                    file_url = file["file_link"]
-                    file_name = file["file_name"]
-                    self.send(Message(text=f'{file_name}\n Link: {file_url}'),
-                              thread_id=thread_id, thread_type=ThreadType.USER)
-            except:
-                for file in file_contents:
-                    file_url = file["file_link"]
-                    file_name = file["file_name"]
-                    self.send(Message(text=f'{file_name}\n Link: {file_url}'),
-                              thread_id=thread_id, thread_type=ThreadType.USER)
-
        
         try:
-            if(".pdf" in msg):
-                searchFiles(self)
-            elif("download youtube" in msg):
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-                link = "".join(msg.split()[-3:])
-                yt_url = link
-                print("yt", yt_url)
-                try:
-                    yt_url = yt_url.replace(
-                        "youtu.be/", "www.youtube.com/watch?v=")
-                except:
-                    pass
-                yt_url = yt_url.replace("youtube", "clipmega")
-                url = requests.get(yt_url, headers=headers)
-                soup = BeautifulSoup(url.text, "html.parser")
-                link = soup.select(".btn-group > a")
-                link = link[0]
-                link = str(link)
-                indx = link.find("href=")
-                indx_l = link.find("extension=mp4")
-                link = link[indx+6:indx_l+13].replace("amp;", "")
-                link = link.replace(" ", "%20")
-                final_link = link
-                print("final", final_link)
-                self.sendRemoteFiles(
-                    file_urls=final_link, message=None, thread_id=thread_id, thread_type=thread_type)
-            elif(".image" in msg):
+            if(".image" in msg):
                 if "credit:" not in msg:
                     reply = "Searching..."
                     sendMsg()
@@ -468,12 +379,9 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                indx = msg.index(".weather")
-                query = msg[indx+11:]
+                query = msg.replace(".weather","")
                 reply = weather(query)
                 sendQuery()
-            elif ".corona of" in msg:
-                corona_details(msg.split()[2])
             elif (".calculus" in msg):
                 stepWiseCalculus(" ".join(msg.split(" ")[1:]))
             elif (".algebra" in msg):
