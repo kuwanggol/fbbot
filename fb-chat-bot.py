@@ -425,8 +425,8 @@ class ChatBot(Client):
                 reply = conSTR(msg,".say")
                 ##reply = texttospeech(mytext)
                 sendMsg()
-                ##sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=None, thread_type=thread_type)
-                self.sendLocalVoiceClips("welcomuwwwue.mp3", message="Hi", thread_id=thread_id, thread_type=thread_type)
+                self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=None, thread_type=thread_type)
+                ##self.sendLocalVoiceClips("welcomuwwwue.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
                 reply = "Working"
                 sendMsg()
 
