@@ -572,9 +572,10 @@ class ChatBot(Client):
         reply = "You just removed reaction from the message."
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
-    def onPersonRemoved(self,mid=None,removed_id=None,author_id=None,thread_id=None,ts=None,):
+    def onPersonRemoved(self,mid=None,removed_id=None,author_id=None,thread_id=None,ts=None):
         reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
-        sendMsg()
+        self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=thread_type)
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
         reply = "You just started a call 📞🎥"
