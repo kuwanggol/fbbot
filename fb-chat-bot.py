@@ -555,15 +555,21 @@ class ChatBot(Client):
             except:
                 pass
     def _parseDelta(self, delta):
+        def getThreadIdAndThreadType(msg_metadata):
+            """Return a tuple consisting of thread ID and thread type."""
+            id_thread = None
+            type_thread = None
+            if "threadFbId" in msg_metadata["threadKey"]:
+                id_thread = str(msg_metadata["threadKey"]["threadFbId"])
+                type_thread = ThreadType.GROUP
+            elif "otherUserFbId" in msg_metadata["threadKey"]:
+                id_thread = str(msg_metadata["threadKey"]["otherUserFbId"])
+                type_thread = ThreadType.USER
+            return id_thread, type_thread
+
         delta_type = delta.get("type")
         delta_class = delta.get("class")
         metadata = delta.get("messageMetadata")
-        if "threadFbId" in metadata["threadKey"]:
-            id_thread = str(metadata["threadKey"]["threadFbId"])
-            type_thread = ThreadType.GROUP
-        elif "otherUserFbId" in metadata["threadKey"]:
-            id_thread = str(metadata["threadKey"]["otherUserFbId"])
-            type_thread = ThreadType.USER
 
         if metadata:
             mid = metadata["messageId"]
@@ -585,7 +591,7 @@ class ChatBot(Client):
             self.addUsersToGroup(removed_id, thread_id=thread_id)
             reply = "Bawal mag leave ✌️😎"
             self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=type_thread)
+                  thread_type=ThreadType.GROUP)
 
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
