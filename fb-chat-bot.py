@@ -501,7 +501,7 @@ class ChatBot(Client):
             elif (".help" in msg):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
-            elif (".unsent" == msg):
+            elif (".unsend" == msg):
                 unsendMsg(message_object.uid)
             elif ("haha" in msg):
                 reactMsg("SMILE")
