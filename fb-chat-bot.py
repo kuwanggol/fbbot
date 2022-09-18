@@ -395,7 +395,8 @@ class ChatBot(Client):
        
         try:
             if(".image" in msg):
-                imageSearch(self, msg)
+                if ("credit" not in msg):
+                    imageSearch(self, msg)
 
             elif(".progsol" in msg):
                 programming_solution(self, msg)
