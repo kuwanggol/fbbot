@@ -13,7 +13,12 @@ import html
 import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
 
-
+def conSTR(subject,query):
+  indx = msg.index(query)
+  lengh = len(query)
+  print(indx)
+  query = msg[indx+lengh:]
+  return(query)
 
 class ChatBot(Client):
 
@@ -325,11 +330,11 @@ class ChatBot(Client):
                 count = int(msg.split()[-1])
             except:
                 count = 10
-            query = " ".join(msg.split()[2:])
+            query = conSTR(msg,".image")
             try:
                 x = int(query.split()[-1])
                 if type(x) == int:
-                    query = " ".join(msg.split()[2:-1])
+                    query = conSTR(msg,".image")
             except:
                 pass
             image_urls = []
@@ -366,7 +371,7 @@ class ChatBot(Client):
 
        
         try:
-            if("search image" in msg):
+            if(".image" in msg):
                 imageSearch(self, msg)
 
             elif(".progsol" in msg):
