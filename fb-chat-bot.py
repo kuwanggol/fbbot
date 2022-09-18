@@ -87,7 +87,7 @@ class ChatBot(Client):
             except:
                 pass
 
-        def weather(self,city=msg.replace(".weather","")):
+        def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
             json_data = requests.get(url).json()
@@ -101,11 +101,7 @@ class ChatBot(Client):
             pressure = json_data["main"]["pressure"]
             humidity = json_data["main"]["humidity"]
             wind_speed = json_data["wind"]["speed"]
-            reply = f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res
-            reply = "Testing"
-            if (author_id != self.uid):
-                self.send(Message(text=reply), thread_id=thread_id,
-                          thread_type=thread_type)
+            return (f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res)
 
         def stepWiseCalculus(query):
             query = query.replace("+", "%2B")
@@ -381,7 +377,7 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                reply = msg.replace(".weather","changed")
+                reply = weather(msg.replace(".weather",""))
                 sendMsg()
 
             elif (".calculus" in msg):
