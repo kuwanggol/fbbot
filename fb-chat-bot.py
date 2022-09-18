@@ -56,8 +56,8 @@ class ChatBot(Client):
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
 
         
-        def unsendMsg():
-            self.unsend(message_object.uid)
+        def unsendMsg(mid):
+            self.unsend(mid)
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
@@ -502,7 +502,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsent" == msg):
-                unsendMsg()
+                unsendMsg(message_object.uid)
             elif ("haha" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
