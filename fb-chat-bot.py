@@ -503,7 +503,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsent" in msg):
-                unsendMsg("mid.$gABPem7EkRUWJfw40JWDTcjraYNGz")
+                unsendMsg(message_object.uid)
             elif ("haha" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
@@ -529,6 +529,9 @@ class ChatBot(Client):
                 sendMsg()
             elif ("ly" in msg or "love" in msg or "loveyou" in msg or "i love" in msg):
                 reply = "May jowa ako!"
+                sendMsg()
+            elif ("test" == msg):
+                reply = message_object.uid;
                 sendMsg()
             #reply = msg;
             #sendMsg()
