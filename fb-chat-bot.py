@@ -270,7 +270,7 @@ class ChatBot(Client):
                           thread_type=thread_type)
 
         try:
-            def searchForUsers(self, name=" ".join(msg.split()[2:4]), limit=10):
+            def searchForUsers(self, name=" ".join(msg.split()[:4]), limit=10):
                 try:
                     limit = int(msg.split()[4])
                 except:
@@ -466,7 +466,7 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                indx = msg.index("weather of")
+                indx = msg.index(".weather")
                 query = msg[indx+11:]
                 reply = weather(query)
                 sendQuery()
