@@ -15,8 +15,14 @@ from difflib import SequenceMatcher, get_close_matches
 from gtts import gTTS
 import random, string
 
-
-
+# message_object.author for profileid
+# message_object.uid for chatid
+#
+# TO GET FULL DOCUMENT print(message_object)
+#
+#
+#
+#
 
 class ChatBot(Client):
 
@@ -442,7 +448,8 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                self.unsend(message_object.uid)
+                self.unsend(mid=None)
+                reply = "Di mo kita 😆"
             elif ("haha" in msg or "lol" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
@@ -472,8 +479,6 @@ class ChatBot(Client):
             elif (".changenn" in msg):
                 msg = conSTR(msg,".changenn")
                 self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
-                reply = str(message_object.author)
-                sendMsg()
 
             #reply = msg;
             #sendMsg()
