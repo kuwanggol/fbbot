@@ -381,8 +381,7 @@ class ChatBot(Client):
             elif ".weather" in msg:
                 indx = msg.index(".weather")
                 query = msg[indx+9:]
-                ##reply = weather(query)
-                reply = query
+                reply = weather(query)
                 sendQuery()
 
             elif (".calculus" in msg):
