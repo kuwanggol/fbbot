@@ -586,10 +586,13 @@ class ChatBot(Client):
         elif "leftParticipantFbId" in delta:
             removed_id = str(delta["leftParticipantFbId"])
             thread_id = str(metadata["threadKey"]["threadFbId"])
+
             self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
+            self.addUsersToGroup(removed_id, thread_id=thread_id)
             reply = "Bawal mag leave ✌️😎"
             self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
+
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
