@@ -555,18 +555,6 @@ class ChatBot(Client):
             except:
                 pass
     def _parseDelta(self, delta):
-        def getThreadIdAndThreadType(msg_metadata):
-            """Return a tuple consisting of thread ID and thread type."""
-            id_thread = None
-            type_thread = None
-            if "threadFbId" in msg_metadata["threadKey"]:
-                id_thread = str(msg_metadata["threadKey"]["threadFbId"])
-                type_thread = ThreadType.GROUP
-            elif "otherUserFbId" in msg_metadata["threadKey"]:
-                id_thread = str(msg_metadata["threadKey"]["otherUserFbId"])
-                type_thread = ThreadType.USER
-            return id_thread, type_thread
-
         delta_type = delta.get("type")
         delta_class = delta.get("class")
         metadata = delta.get("messageMetadata")
