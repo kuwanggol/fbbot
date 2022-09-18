@@ -426,7 +426,7 @@ class ChatBot(Client):
                 ##reply = texttospeech(mytext)
                 sendMsg()
                 ##sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=None, thread_type=thread_type)
-                sendLocalVoiceClips("welcomuwwwue.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
+                sendLocalVoiceClips("welcomuwwwue.mp3", message="Hi", thread_id=thread_id, thread_type=thread_type)
                 reply = "Working"
                 sendMsg()
 
