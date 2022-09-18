@@ -381,7 +381,7 @@ class ChatBot(Client):
             elif ".weather" in msg:
                 query = msg.replace(".weather","")
                 reply = weather(query)
-                sendQuery()
+                sendMsg()
             elif (".calculus" in msg):
                 stepWiseCalculus(" ".join(msg.split(" ")[1:]))
             elif (".algebra" in msg):
