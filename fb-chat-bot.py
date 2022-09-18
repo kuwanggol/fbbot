@@ -64,12 +64,6 @@ class ChatBot(Client):
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
 
-        ##def sendLocalVoiceClips(self, clip_paths, message=None, thread_id=None, thread_type=ThreadType.USER):
-        ##    clip_paths = require_list(clip_paths)
-        ##    with get_files_from_paths(clip_paths) as x:
-        ##        files = self._upload(x, voice_clip=True)
-        ##    return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
-
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
@@ -229,11 +223,7 @@ class ChatBot(Client):
             except Exception as e:
                 pass
 
-        def sendRemoteVoiceClips(self, clip_urls, message=None, thread_id=None, thread_type=ThreadType.USER):
-            clip_urls = require_list(clip_urls)
-            files = self._upload(get_files_from_urls(clip_urls), voice_clip=True)
-            return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
-
+        
         def stepWiseQueries(query):
             query = query.replace("+", "%2B")
             api_address = f"http://api.wolframalpha.com/v2/query?appid=Y98QH3-24PWX83VGA&input={query}&podstate=Result__Step-by-step+solution&format=plaintext&output=json"
@@ -432,10 +422,12 @@ class ChatBot(Client):
             elif (".su" in msg):
                 searchForUsers(self)
             elif (".say" in msg):
-                reply = conSTR(msg,".say")
+                ##reply = conSTR(msg,".say")
                 ##reply = texttospeech(mytext)
+                ##sendMsg()
+                sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
+                reply = "Working"
                 sendMsg()
-                ##sendRemoteVoiceClips(self, "https://www.mboxdrive.com/welcome.mp3")
 
             elif (".mute" in msg):
                 try:
@@ -448,7 +440,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                self.unsend(mid="mid.$gABPem7EkRUWJgWWKamDUCBCDTCD_")
+                self.unsend(mid="")
                 reply = "Di mo kita 😆"
                 sendMsg()
             elif ("haha" in msg or "lol" in msg):
