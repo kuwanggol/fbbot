@@ -99,7 +99,7 @@ class ChatBot(Client):
         def texttospeech(mytext):
             language = 'tl'
             myobj = gTTS(text=mytext, lang=language, slow=False)
-            randintt = random.randint(1,10000) + ".mp3"
+            randintt = str(random.randint(1,10000) + ".mp3")
             myobj.save(randintt)
             return(randintt)
 
@@ -417,7 +417,7 @@ class ChatBot(Client):
                 searchForUsers(self)
             elif (".say" in msg):
                 mytext = conSTR(msg,".say")
-                reply = str(texttospeech(mytext))
+                reply = texttospeech(mytext)
                 sendMsg()
 
             elif (".mute" in msg):
