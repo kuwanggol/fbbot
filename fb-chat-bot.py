@@ -58,11 +58,11 @@ class ChatBot(Client):
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
 
-        def sendLocalVoiceClips(self, clip_paths, message=None, thread_id=None, thread_type=ThreadType.USER):
-            clip_paths = require_list(clip_paths)
-            with get_files_from_paths(clip_paths) as x:
-                files = self._upload(x, voice_clip=True)
-            return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
+        ##def sendLocalVoiceClips(self, clip_paths, message=None, thread_id=None, thread_type=ThreadType.USER):
+        ##    clip_paths = require_list(clip_paths)
+        ##    with get_files_from_paths(clip_paths) as x:
+        ##        files = self._upload(x, voice_clip=True)
+        ##    return self._sendFiles(files=files, message=message, thread_id=thread_id, thread_type=thread_type)
 
         def unsend(self, mid):
             data = {"message_id": mid}
