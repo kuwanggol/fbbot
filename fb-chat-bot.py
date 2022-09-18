@@ -56,8 +56,9 @@ class ChatBot(Client):
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
 
         
-        def unsendMsg(mid):
-            self.unsend(mid)
+        def unsend(self, mid):
+            data = {"message_id": mid}
+            j = self._payload_post("/messaging/unsend_message/?dpr=1", data)
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
@@ -275,6 +276,7 @@ class ChatBot(Client):
                     limit = int(msg.split()[4])
                 except:
                     limit = 10
+                name = name.replace(".su",name)
                 params = {"search": name, "limit": limit}
                 (j,) = self.graphql_requests(
                     _graphql.from_query(_graphql.SEARCH_USER, params))
@@ -489,7 +491,6 @@ class ChatBot(Client):
                 sendQuery()
 
             elif (".su" in msg):
-                name = msg.replace(".su",msg)
                 searchForUsers(self,name)
 
             elif (".mute" in msg):
@@ -503,7 +504,7 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                unsendMsg(message_object.uid)
+                unsend(self,message_object.uid)
             elif ("haha" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
