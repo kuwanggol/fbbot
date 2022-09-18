@@ -382,7 +382,8 @@ class ChatBot(Client):
 
                 sendQuery()
             elif ".weather" in msg:
-                reply = weather(conSTR(msg,".weather"))
+                msg = conSTR(msg,".weather")
+                reply = weather(msg)
                 sendQuery()
 
             elif (".calculus" in msg):
