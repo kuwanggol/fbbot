@@ -57,8 +57,7 @@ class ChatBot(Client):
 
         
         def unsendMsg():
-            data = {"message_id": message_object.uid}
-            j = self._payload_post("/messaging/unsend_message/?dpr=1", data)
+            self.unsend(message_object.uid)
 
         def sendQuery():
             self.send(Message(text=reply), thread_id=thread_id,
