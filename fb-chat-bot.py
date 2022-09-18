@@ -440,7 +440,7 @@ class ChatBot(Client):
                 except:
                     pass
             elif (".help" in msg):
-                reply = ".image - search image online.\n.weather {county/city}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
+                reply = ".image - search image online.\n.weather {county/city}\n.translate - {text} to {ne}\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
                 unsend(self,message_object.uid)
