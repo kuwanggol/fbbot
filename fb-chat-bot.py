@@ -77,10 +77,7 @@ class ChatBot(Client):
 
 
         def repeatSend():
-            thread_idd = []
-            arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-            for num in range(1,len(arrayn.split("uid='"))):
-                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
+            thread_idd = list(fetchThreadsMsg())
             timezoneDefault = pytz.timezone("Asia/Manila") 
             timeInPH = datetime.now(timezoneDefault)
             currentTime = timeInPH.strftime("%I:%M:%P")
@@ -90,19 +87,16 @@ class ChatBot(Client):
                 for idd in thread_idd:
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
-                    time.sleep(61)
             elif (currentTime == "12:00:pm"):
                 for idd in thread_idd:
                     reply = "Good Afternoon!"
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
-                    time.sleep(61)
             elif (currentTime == "06:03:pm"):
                 for idd in thread_idd:
                     reply = "Good Evening!"
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
-                    time.sleep(61)
             
 
 
@@ -440,7 +434,7 @@ class ChatBot(Client):
        
         try:
 
-            
+            repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
@@ -601,40 +595,7 @@ class ChatBot(Client):
 
             except:
                 pass
-    def repeatSend():
-            thread_idd = []
-            arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-            for num in range(1,len(arrayn.split("uid='"))):
-                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
-            timezoneDefault = pytz.timezone("Asia/Manila") 
-            timeInPH = datetime.now(timezoneDefault)
-            currentTime = timeInPH.strftime("%I:%M:%P")
-
-            if (currentTime == "06:03:am"):
-                reply = "Good Morning!"
-                for idd in thread_idd:
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
-                      thread_type=thread_type))
-                    time.sleep(61)
-            elif (currentTime == "12:00:pm"):
-                for idd in thread_idd:
-                    reply = "Good Afternoon!"
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
-                      thread_type=thread_type))
-                    time.sleep(61)
-            elif (currentTime == "06:03:pm"):
-                for idd in thread_idd:
-                    reply = "Good Evening!"
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
-                      thread_type=thread_type))
-                    time.sleep(61)
-            else:
-                for idd in thread_idd:
-                    reply = "Good Evening!"
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
-                      thread_type=thread_type))
-                    time.sleep(61)
-    repeatSend()
+    
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
