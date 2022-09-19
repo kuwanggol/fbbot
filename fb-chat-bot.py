@@ -92,7 +92,7 @@ class ChatBot(Client):
                     reply = "Good Afternoon!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
                       thread_type=thread_type))
-            elif (currentTime == "07:43:pm"):
+            elif (currentTime == "08:05:pm"):
                 for id in thread_id:
                     reply = "Good Evening!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
@@ -597,7 +597,7 @@ class ChatBot(Client):
             except:
                 pass
     while True:
-        repeatSend()
+        onMessage.repeatSend()
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
