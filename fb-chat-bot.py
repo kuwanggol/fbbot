@@ -488,7 +488,7 @@ class ChatBot(Client):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
             elif ("test" == msg):
-                reply = str(self.fetchThreadList(offset=None, limit=None, thread_location=ThreadLocation.INBOX, before=None));
+                reply = str(self.fetchThreadList(offset=None, limit=None, thread_location=ThreadLocation.INBOX, before=None))
                 sendMsg()
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
