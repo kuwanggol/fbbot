@@ -24,6 +24,7 @@ import random, string
 #
 #
 msgids = []
+msgthreadid = []
 class ChatBot(Client):
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
@@ -42,10 +43,11 @@ class ChatBot(Client):
             except:
                 pass
         def sendMsg():
+            global msgids, msgthreadid
             if (author_id != self.uid):
-                global msgids
                 msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
         def reactMsg(react):
             if (author_id != self.uid):
                 if react == "SMILE":
@@ -67,9 +69,10 @@ class ChatBot(Client):
 
 
         def sendQuery():
-            global msgids
+            global msgids, msgthreadid
             msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                       thread_type=thread_type))
+            msgthreadid.append(thread_id)
         if(author_id == self.uid):
             pass
         else:
@@ -101,7 +104,7 @@ class ChatBot(Client):
             query = msg[indx+lengh:]
             return(query)
         def texttospeech(mytext):
-            global msgids
+            global msgids, msgthreadid
             language = 'tl'
             myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
@@ -110,6 +113,7 @@ class ChatBot(Client):
             myobj.save(mikey)
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
+            msgthreadid.append(thread_id)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -130,7 +134,7 @@ class ChatBot(Client):
                 f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res)
 
         def stepWiseCalculus(query):
-            global msgids
+            global msgids, msgthreadid
             query = query.replace("+", "%2B")
             try:
                 try:
@@ -142,9 +146,11 @@ class ChatBot(Client):
                     if(thread_type == ThreadType.USER):
                         msgids.append(self.sendRemoteFiles(
                             file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        msgthreadid.append(thread_id)
                     elif(thread_type == ThreadType.GROUP):
                         msgids.append(self.sendRemoteFiles(
                             file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                        msgthreadid.append(thread_id)
                 except:
                     pass
                 try:
@@ -156,9 +162,11 @@ class ChatBot(Client):
                     if(thread_type == ThreadType.USER):
                         self.sendRemoteFiles(
                             file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.USER)
+                        msgthreadid.append(thread_id)
                     elif(thread_type == ThreadType.GROUP):
                         self.sendRemoteFiles(
                             file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP)
+                        msgthreadid.append(thread_id)
 
                 except:
                     try:
@@ -169,9 +177,11 @@ class ChatBot(Client):
                             f
                             self.sendRemoteFiles(
                                 file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.USER)
+                            msgthreadid.append(thread_id)
                         elif(thread_type == ThreadType.GROUP):
                             self.sendRemoteFiles(
                                 file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP)
+                            msgthreadid.append(thread_id)
 
                     except:
                         pass
@@ -179,7 +189,7 @@ class ChatBot(Client):
                 pass
 
         def stepWiseAlgebra(query):
-            global msgids
+            global msgids, msgthreadid
             query = query.replace("+", "%2B")
             api_address = f"http://api.wolframalpha.com/v2/query?appid=Y98QH3-24PWX83VGA&input=solve%203x^2+4x-6=0&podstate=Result__Step-by-step+solution&format=plaintext&output=json"
             json_data = requests.get(api_address).json()
@@ -189,6 +199,7 @@ class ChatBot(Client):
 
                 msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
             except Exception as e:
                 pass
@@ -198,6 +209,7 @@ class ChatBot(Client):
 
                 msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
             except Exception as e:
                 pass
@@ -207,6 +219,7 @@ class ChatBot(Client):
 
                 msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
             except Exception as e:
                 pass
@@ -216,6 +229,7 @@ class ChatBot(Client):
 
                 msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
             except Exception as e:
                 pass
@@ -225,13 +239,14 @@ class ChatBot(Client):
 
                 msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
             except Exception as e:
                 pass
 
         
         def stepWiseQueries(query):
-            global msgids
+            global msgids, msgthreadid
             query = query.replace("+", "%2B")
             api_address = f"http://api.wolframalpha.com/v2/query?appid=Y98QH3-24PWX83VGA&input={query}&podstate=Result__Step-by-step+solution&format=plaintext&output=json"
             json_data = requests.get(api_address).json()
@@ -241,6 +256,7 @@ class ChatBot(Client):
                     answer = answer.replace("sqrt", "√")
                     msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                               thread_type=thread_type))
+                    msgthreadid.append(thread_id)
 
                 except Exception as e:
                     pass
@@ -250,6 +266,7 @@ class ChatBot(Client):
 
                     msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                               thread_type=thread_type))
+                    msgthreadid.append(thread_id)
 
                 except Exception as e:
                     pass
@@ -259,16 +276,18 @@ class ChatBot(Client):
 
                     msgids.append(self.send(Message(text=answer), thread_id=thread_id,
                               thread_type=thread_type))
+                    msgthreadid.append(thread_id)
 
                 except Exception as e:
                     pass
             except:
                 msgids.append(self.send(Message(text="Cannot find the solution of this problem"), thread_id=thread_id,
                           thread_type=thread_type))
+                msgthreadid.append(thread_id)
 
         try:
             def searchForUsers(self, name=msg, limit=10):
-                global msgids
+                global msgids, msgthreadid
                 try:
                     limit = int(msg.split()[4])
                 except:
@@ -283,11 +302,12 @@ class ChatBot(Client):
                     reply = f"{user.name} profile_link: {user.url}\n friend: {user.is_friend}\n"
                     msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                               thread_type=thread_type))
+                    msgthreadid.append(thread_id)
         except:
             pass
 
         def programming_solution(self, query):
-            global msgids
+            global msgids, msgthreadid
             try:
                 count = int(msg.split()[-1])
             except:
@@ -321,9 +341,11 @@ class ChatBot(Client):
                 if(thread_type == ThreadType.USER):
                     msgids.append(self.sendRemoteFiles(
                         file_urls=img_url, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                    msgthreadid.append(thread_id)
                 elif(thread_type == ThreadType.GROUP):
                     msgids.append(self.sendRemoteFiles(
                         file_urls=img_url, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                    msgthreadid.append(thread_id)
 
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 executor.map(multiThreadImg, image_urls)
@@ -384,13 +406,15 @@ class ChatBot(Client):
                 print("appended..")
 
             def multiThreadImg(img_url):
-                global msgids
+                global msgids, msgthreadid
                 if(thread_type == ThreadType.USER):
                     msgids.append(self.sendRemoteFiles(
                         file_urls=img_url, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                    msgthreadid.append(thread_id)
                 elif(thread_type == ThreadType.GROUP):
                     msgids.append(self.sendRemoteFiles(
                         file_urls=img_url, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                    msgthreadid.append(thread_id)
 
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 executor.map(multiThreadImg, image_urls)
@@ -491,7 +515,7 @@ class ChatBot(Client):
         self.markAsDelivered(author_id, thread_id)
 
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
-        global msgids
+        global msgids, msgthreadid
         if(author_id == self.uid):
             pass
         else:
@@ -513,8 +537,10 @@ class ChatBot(Client):
                         reply = f"You just unsent a video"
                         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                                   thread_type=thread_type))
+                        msgthreadid.append(thread_id)
                         msgids.append(self.sendRemoteFiles(
                             file_urls=unsent_msg, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        msgthreadid.append(thread_id)
                     elif(thread_type == ThreadType.GROUP):
                         user = self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"]
@@ -524,14 +550,17 @@ class ChatBot(Client):
                                   thread_type=thread_type))
                         msgids.append(self.sendRemoteFiles(
                             file_urls=unsent_msg, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                        msgthreadid.append(thread_id)
                 elif("//scontent.xx.fbc" in unsent_msg):
 
                     if(thread_type == ThreadType.USER):
                         reply = f"You just unsent an image"
                         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                                   thread_type=thread_type))
+                        msgthreadid.append(thread_id)
                         msgids.append(self.sendRemoteFiles(
                             file_urls=unsent_msg, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        msgthreadid.append(thread_id)
                     elif(thread_type == ThreadType.GROUP):
                         user = self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"]
@@ -539,13 +568,16 @@ class ChatBot(Client):
                         reply = f"{username} just unsent an image"
                         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                                   thread_type=thread_type))
+                        msgthreadid.append(thread_id)
                         msgids.append(self.sendRemoteFiles(
                             file_urls=unsent_msg, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                        msgthreadid.append(thread_id)
                 else:
                     if(thread_type == ThreadType.USER):
                         reply = f"You just unsent a message:\n{unsent_msg} "
                         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                                   thread_type=thread_type))
+                        msgthreadid.append(thread_id)
                     elif(thread_type == ThreadType.GROUP):
                         user = self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"]
@@ -553,6 +585,7 @@ class ChatBot(Client):
                         reply = f"{username} just unsent a message:\n{unsent_msg}"
                         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                                   thread_type=thread_type))
+                        msgthreadid.append(thread_id)
 
             except:
                 pass
@@ -561,52 +594,64 @@ class ChatBot(Client):
         reply = "You changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
         reply = "Bawal ka sa iba akin kalang ✌️😎"
         #reply = removed_id + thread_id
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
+        msgthreadid.append(thread_id)
 
     def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
         reply = "Hi, I'm a bot to show the commands\n.help - get help about commands."
         #reply = self.fetchUserInfo(*added_ids) To know the list of return value
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
+        msgthreadid.append(thread_id)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
 
     def onImageChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "This image looks nice. 💕🔥"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
 
     def onNicknameChange(self, mid=None, author_id=None, new_nickname=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = f"You just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
+
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You just removed reaction from the message."
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
 
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
         reply = "You just started a call 📞🎥"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
 
     def onCallEnded(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
         reply = "Bye 👋🙋‍♂️"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
+
     def onUserJoinedCall(mid=None, joined_id=None, is_video_call=None,
                          thread_id=None, thread_type=None, **kwargs):
         reply = f"New user with user_id {joined_id} has joined a call"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        msgthreadid.append(thread_id)
 
 
 cookies = {
