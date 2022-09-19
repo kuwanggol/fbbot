@@ -82,9 +82,9 @@ class ChatBot(Client):
             timeInPH = datetime.now(timezoneDefault)
             currentTime = timeInPH.strftime("%I:%M:%P")
 
-            if (currentTime == "06:00:am"):
+            if (currentTime != "06:00:am"):
                 for idd in thread_idd:
-                    reply = thread_idd[int(idd)]
+                    reply = "Yamete Test"
                     msgids.append(self.send(Message(text=reply), thread_id=thread_idd[int(idd)],
                       thread_type=thread_type))
 
