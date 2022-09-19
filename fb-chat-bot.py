@@ -76,33 +76,6 @@ class ChatBot(Client):
             return(thread_idd)
 
 
-        def repeatSend():
-            thread_id = str(fetchThreadsMsg())
-            timezoneDefault = pytz.timezone("Asia/Manila") 
-            timeInPH = datetime.now(timezoneDefault)
-            currentTime = timeInPH.strftime("%I:%M:%P")
-
-            if (currentTime == "06:00:am"):
-                reply = "Good Morning!"
-                for id in thread_id:
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
-                      thread_type=thread_type))
-            elif (currentTime == "12:00:pm"):
-                for id in thread_id:
-                    reply = "Good Afternoon!"
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
-                      thread_type=thread_type))
-            elif (currentTime == "07:33:pm"):
-                for id in thread_id:
-                    reply = "Good Evening!"
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
-                      thread_type=thread_type))
-            else:
-                print(currentTime)
-
-            
-
-
         def sendQuery():
             global msgids
             msgids.append(self.send(Message(text=reply), thread_id=thread_id,
@@ -523,7 +496,7 @@ class ChatBot(Client):
                 sendMsg()
             #reply = msg;
             #sendMsg()
-            repeatSend()
+            
 
         except Exception as e:
             print(e)
@@ -597,6 +570,27 @@ class ChatBot(Client):
             except:
                 pass
 
+    def repeatSend():
+        thread_id = str(fetchThreadsMsg())
+        timezoneDefault = pytz.timezone("Asia/Manila") 
+        timeInPH = datetime.now(timezoneDefault)
+        currentTime = timeInPH.strftime("%I:%M:%P")
+        if (currentTime == "06:00:am"):
+            reply = "Good Morning!"
+            for id in thread_id:
+                msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),thread_type=thread_type))
+        elif (currentTime == "12:00:pm"):
+            for id in thread_id:
+                reply = "Good Afternoon!"
+                msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),thread_type=thread_type))
+        elif (currentTime == "07:40:pm"):
+            for id in thread_id:
+                reply = "Good Evening!"
+                msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),thread_type=thread_type))
+        else:
+                print(currentTime)
+
+    repeatSend()
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
