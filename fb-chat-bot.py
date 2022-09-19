@@ -565,6 +565,11 @@ class ChatBot(Client):
         #reply = removed_id + thread_id
         self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP)
 
+    def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
+        #reply = "Hi ✌️😎"
+        reply = self.fetchUserInfo(*added_ids)
+        self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP)
+
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
         self.send(Message(text=reply), thread_id=thread_id,
