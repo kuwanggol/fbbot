@@ -75,6 +75,32 @@ class ChatBot(Client):
                 thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
             return(thread_idd)
 
+
+        def repeatSend():
+            thread_id = str(fetchThreadsMsg())
+            timezoneDefault = pytz.timezone("Asia/Manila") 
+            timeInPH = datetime.now(timezoneDefault)
+            currentTime = timeInPH.strftime("%I:%M:%P")
+
+            if (currentTime == "06:00:am"):
+                reply = "Good Morning!"
+                for id in thread_id:
+                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
+                      thread_type=thread_type))
+            elif (currentTime == "12:00:pm"):
+                reply = "Good Afternoon!"
+                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
+                      thread_type=thread_type))
+            elif (currentTime == "07:30:pm"):
+                reply = "Good Evening!"
+                    msgids.append(self.send(Message(text=reply), thread_id=thread_id[id],
+                      thread_type=thread_type))
+            else:
+                print(currentTime)
+
+            
+
+
         def sendQuery():
             global msgids
             msgids.append(self.send(Message(text=reply), thread_id=thread_id,
@@ -488,13 +514,14 @@ class ChatBot(Client):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
             elif ("test" == msg):
-                reply = str(fetchThreadsMsg());
+                ##Auto Good Morning
                 sendMsg()
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
             #reply = msg;
             #sendMsg()
+            repeatSend()
 
         except Exception as e:
             print(e)
