@@ -92,7 +92,7 @@ class ChatBot(Client):
                     reply = "Good Afternoon!"
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
-            elif (currentTime == "12:35:pm"):
+            elif (currentTime == "12:50:pm"):
                 for idd in thread_idd:
                     reply = "Good Evening!"
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
@@ -434,7 +434,7 @@ class ChatBot(Client):
        
         try:
 
-            ##repeatSend()
+            repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
