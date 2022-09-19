@@ -69,11 +69,11 @@ class ChatBot(Client):
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
         def fetchThreadsMsg():
-            thread_id = []
+            thread_idd = []
             arrayn = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
             for num in range(1,len(arrayn.split("uid='"))):
-                thread_id.append(arrayn.split("uid='")[num].split("', type=")[0])
-            return(thread_id)
+                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
+            return(thread_idd)
 
         def sendQuery():
             global msgids
