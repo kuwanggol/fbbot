@@ -563,7 +563,7 @@ class ChatBot(Client):
         #self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
         #reply = "Bawal ka sa iba akin kalang ✌️😎"
         reply = removed_id + thread_id
-        self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=thread_type)
+        self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
