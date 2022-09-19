@@ -559,10 +559,11 @@ class ChatBot(Client):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
-    def onPersonRemoved(self, mid=mid, removed_id=removed_id, author_id=author_id, thread_id=thread_id, ts=ts, msg=msg):
-        self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
-        reply = "Bawal ka sa iba akin kalang ✌️😎"
-        self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
+    def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
+        #self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
+        #reply = "Bawal ka sa iba akin kalang ✌️😎"
+        reply = removed_id + thread_id
+        self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=thread_type)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
