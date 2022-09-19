@@ -83,24 +83,9 @@ class ChatBot(Client):
             currentTime = timeInPH.strftime("%I:%M:%P")
 
             if (currentTime == "06:00:am"):
-                reply = "Good Morning!"
-                for idd in thread_idd:
-                    msgids.append(self.send(Message(text=reply), thread_id=int(thread_idd[int(idd)]),
-                      thread_type=thread_type))
-            elif (currentTime == "12:00:pm"):
-                for idd in thread_idd:
-                    reply = "Good Afternoon!"
-                    msgids.append(self.send(Message(text=reply), thread_id=int(thread_idd[int(idd)]),
-                      thread_type=thread_type))
-            elif (currentTime == "11:55:pm"):
-                for idd in thread_idd:
-                    reply = "Good Evening!"
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_idd[int(idd)],
-                      thread_type=thread_type))
-            else:
                 for idd in thread_idd:
                     reply = thread_idd[int(idd)]
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_idd,
+                    msgids.append(self.send(Message(text=reply), thread_id=thread_idd[int(idd)],
                       thread_type=thread_type))
 
             
