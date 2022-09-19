@@ -560,8 +560,8 @@ class ChatBot(Client):
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
-        self.addUsersToGroup(user_ids=100078868689291, thread_id=None, **kwargs)
-        reply = "Added to the Group"
+        self.addUsersToGroup(user_ids=removed_id, thread_id=None)
+        reply = "Bawal ka sa iba akin kalang ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
