@@ -43,8 +43,9 @@ class ChatBot(Client):
                 pass
         def sendMsg():
             if (author_id != self.uid):
-                self.send(Message(text=reply), thread_id=thread_id,
-                          thread_type=thread_type)
+                global msgids
+                msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                          thread_type=thread_type))
         def reactMsg(react):
             if (author_id != self.uid):
                 if react == "SMILE":
@@ -66,8 +67,9 @@ class ChatBot(Client):
 
 
         def sendQuery():
-            self.send(Message(text=reply), thread_id=thread_id,
-                      thread_type=thread_type)
+            global msgids
+            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                      thread_type=thread_type))
         if(author_id == self.uid):
             pass
         else:
@@ -99,6 +101,7 @@ class ChatBot(Client):
             query = msg[indx+lengh:]
             return(query)
         def texttospeech(mytext):
+            global msgids
             language = 'tl'
             myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
@@ -106,7 +109,7 @@ class ChatBot(Client):
             mikey = res + ".mp3"
             myobj.save(mikey)
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
-            self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type)
+            msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
@@ -440,7 +443,8 @@ class ChatBot(Client):
                 reply = ".image - search image online.\n.weather - {county/city}\n.say - convert text to speech.\n.solve - basic math calculation.\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
-                self.unsend(mid=None)
+                for val in msgids:
+                    self.unsend(mid=str(val))
                 reply = "Di mo kita 😆"
                 sendMsg()
             elif ("haha" in msg or "lol" in msg):
