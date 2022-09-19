@@ -628,6 +628,12 @@ class ChatBot(Client):
                     msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
                     time.sleep(61)
+            else:
+                for idd in thread_idd:
+                    reply = "Good Evening!"
+                    msgids.append(self.send(Message(text=reply), thread_id=idd,
+                      thread_type=thread_type))
+                    time.sleep(61)
     repeatSend()
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
