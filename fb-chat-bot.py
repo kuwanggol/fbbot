@@ -14,6 +14,8 @@ import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
 from gtts import gTTS
 import random, string
+from datetime import datetime
+import pytz
 
 # message_object.author for profileid
 # message_object.uid for chatid
@@ -24,8 +26,65 @@ import random, string
 #
 #
 msgids = []
-msgthreadid = []
+
 class ChatBot(Client):
+
+    def fetchThreads(self, thread_location, before=None, after=None, limit=None):
+        """Fetch all threads in ``thread_location``.
+
+        Threads will be sorted from newest to oldest.
+
+        Args:
+            thread_location (ThreadLocation): INBOX, PENDING, ARCHIVED or OTHER
+            before: Fetch only thread before this epoch (in ms) (default all threads)
+            after: Fetch only thread after this epoch (in ms) (default all threads)
+            limit: The max. amount of threads to fetch (default all threads)
+
+        Returns:
+            list: :class:`Thread` objects
+
+        Raises:
+            FBchatException: If request failed
+        """
+        threads = []
+
+        last_thread_timestamp = None
+        while True:
+            # break if limit is exceeded
+            if limit and len(threads) >= limit:
+                break
+
+            # fetchThreadList returns at max 20 threads before last_thread_timestamp (included)
+            candidates = self.fetchThreadList(
+                before=last_thread_timestamp, thread_location=thread_location
+            )
+
+            if len(candidates) > 1:
+                threads += candidates[1:]
+            else:  # End of threads
+                break
+
+            last_thread_timestamp = threads[-1].last_message_timestamp
+
+            # FB returns a sorted list of threads
+            if (before is not None and int(last_thread_timestamp) > before) or (
+                after is not None and int(last_thread_timestamp) < after
+            ):
+                break
+
+        # Return only threads between before and after (if set)
+        if before is not None or after is not None:
+            for t in threads:
+                last_message_timestamp = int(t.last_message_timestamp)
+                if (before is not None and last_message_timestamp > before) or (
+                    after is not None and last_message_timestamp < after
+                ):
+                    threads.remove(t)
+
+        if limit and len(threads) > limit:
+            return threads[:limit]
+
+        return threads
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
@@ -47,7 +106,7 @@ class ChatBot(Client):
             if (author_id != self.uid):
                 msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                           thread_type=thread_type))
-                msgthreadid()
+        
         def reactMsg(react):
             if (author_id != self.uid):
                 if react == "SMILE":
@@ -397,6 +456,8 @@ class ChatBot(Client):
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 executor.map(multiThreadImg, image_urls)
 
+
+
        
         try:
             if(".image" in msg):
@@ -479,7 +540,7 @@ class ChatBot(Client):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
             elif ("test" == msg):
-                reply = message_object.uid;
+                reply = str(fetchThreads(self,"INBOX"));
                 sendMsg()
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
