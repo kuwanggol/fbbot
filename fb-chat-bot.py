@@ -98,9 +98,8 @@ class ChatBot(Client):
                     msgids.append(self.send(Message(text=reply), thread_id=thread_idd[int(id)],
                       thread_type=thread_type))
             else:
-                for id in thread_id:
-                    reply = thread_idd[int(id)]
-                    msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,
+                reply = thread_idd
+                msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,
                       thread_type=thread_type))
 
             
