@@ -77,7 +77,7 @@ class ChatBot(Client):
 
 
         def repeatSend():
-            thread_id = str(fetchThreadsMsg())
+            thread_id = list(fetchThreadsMsg())
             timezoneDefault = pytz.timezone("Asia/Manila") 
             timeInPH = datetime.now(timezoneDefault)
             currentTime = timeInPH.strftime("%I:%M:%P")
@@ -92,7 +92,7 @@ class ChatBot(Client):
                     reply = "Good Afternoon!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
                       thread_type=thread_type))
-            elif (currentTime == "08:10:pm"):
+            elif (currentTime == "11:35:pm"):
                 for id in thread_id:
                     reply = "Good Evening!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
