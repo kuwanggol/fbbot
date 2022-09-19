@@ -28,7 +28,7 @@ import pytz
 msgids = []
 
 class ChatBot(Client):
-
+    print(self.fetchThreads("INBOX", before=None, after=None, limit=None))
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
             msg = str(message_object).split(",")[15][14:-1]
