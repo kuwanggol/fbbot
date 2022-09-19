@@ -51,7 +51,10 @@ class ChatBot(Client):
             reply = "Bawal mag leave ✌️😎"
             self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=ThreadType.GROUP)
-        raise Exception("Exit")
+        else:
+            reply = delta_class
+            self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=ThreadType.GROUP)
             
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
