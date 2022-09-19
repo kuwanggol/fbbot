@@ -437,7 +437,7 @@ class ChatBot(Client):
        
         try:
             while True:
-                onMessage.repeatSend()
+                repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
