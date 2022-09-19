@@ -436,6 +436,8 @@ class ChatBot(Client):
 
        
         try:
+            while True:
+                onMessage.repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
@@ -596,8 +598,7 @@ class ChatBot(Client):
 
             except:
                 pass
-    while True:
-        onMessage.repeatSend()
+    
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
