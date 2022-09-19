@@ -71,9 +71,9 @@ class ChatBot(Client):
         def fetchThreadsMsg():
             thread_idd = []
             arrayn = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
-            for num in range(1,len(arrayn.split("uid='"))):
-                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
-            return(thread_idd)
+            #for num in range(1,len(arrayn.split("uid='"))):
+            #    thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
+            return(arrayn)
 
         def sendQuery():
             global msgids
