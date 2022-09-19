@@ -25,33 +25,7 @@ import random, string
 #
 
 class ChatBot(Client):
-    def _parseDelta(self, delta):
-        delta_type = delta.get("type")
-        delta_class = delta.get("class")
-        metadata = delta.get("messageMetadata")
 
-        if metadata:
-            mid = metadata["messageId"]
-            author_id = str(metadata["actorFbId"])
-            ts = int(metadata.get("timestamp"))
-
-        # Added participants
-        if "addedParticipants" in delta:
-            added_ids = [str(x["userFbId"]) for x in delta["addedParticipants"]]
-            thread_id = str(metadata["threadKey"]["threadFbId"])
-            self.onPeopleAdded(mid=mid,added_ids=added_ids,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
-
-        # Left/removed participants
-        elif "leftParticipantFbId" in delta:
-            removed_id = str(delta["leftParticipantFbId"])
-            thread_id = str(metadata["threadKey"]["threadFbId"])
-
-            self.onPersonRemoved(mid=mid,removed_id=removed_id,author_id=author_id,thread_id=thread_id,ts=ts,msg=delta)
-            self.addUsersToGroup(removed_id, thread_id=thread_id)
-            reply = "Bawal mag leave ✌️😎"
-            self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=ThreadType.GROUP)
-            
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
             msg = str(message_object).split(",")[15][14:-1]
@@ -585,6 +559,10 @@ class ChatBot(Client):
         reply = "You changed the theme ✌️😎"
         self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type)
+    def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
+        self.addUsersToGroup(user_ids=100078868689291, thread_id=None, **kwargs):
+            reply = "Added to the Group"
+            self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
