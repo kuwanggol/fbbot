@@ -568,7 +568,7 @@ class ChatBot(Client):
     def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
         reply = "Hi, I'm a bot to show the commands\n.help - get help about commands✌️😎"
         #reply = self.fetchUserInfo(*added_ids) To know the list of return value
-        self.quickReply(reply, payload=None, thread_id=thread_id, thread_type=ThreadType.GROUP)
+        self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP)
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = "You changed the emoji 😎. Great!"
