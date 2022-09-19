@@ -85,7 +85,7 @@ class ChatBot(Client):
             if (currentTime != "06:00:am"):
                 for idd in thread_idd:
                     reply = "Yamete Test"
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_idd[int(idd)],
+                    msgids.append(self.send(Message(text=reply), thread_id=idd,
                       thread_type=thread_type))
 
             
