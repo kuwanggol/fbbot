@@ -92,7 +92,7 @@ class ChatBot(Client):
                     reply = "Good Afternoon!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
                       thread_type=thread_type))
-            elif (currentTime == "11:35:pm"):
+            elif (currentTime == "11:39:pm"):
                 for id in thread_id:
                     reply = "Good Evening!"
                     msgids.append(self.send(Message(text=reply), thread_id=int(thread_id[id]),
