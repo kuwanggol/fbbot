@@ -23,7 +23,7 @@ import random, string
 #
 #
 #
-
+msgids = []
 class ChatBot(Client):
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
@@ -107,14 +107,6 @@ class ChatBot(Client):
             myobj.save(mikey)
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type)
-
-        def onPeopleAdded(mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
-            reply = "{} added: {} in {}".format(author_id, ", ".join(added_ids), thread_id)
-            self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
-
-        def onPersonRemoved(mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
-            reply = "{} removed: {} in {}".format(author_id, removed_id, thread_id)
-            self.send(Message(text=reply), thread_id=thread_id,thread_type=thread_type)
 
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
