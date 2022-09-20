@@ -137,7 +137,7 @@ class ChatBot(Client):
         def texttospeech(mytext):
             global msgids
             language = 'tl'
-            myobj = gTTS(text=mytext, lang=language, slow=False)
+            myobj = gTTS(text=str(mytext) , lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
                             string.ascii_lowercase, k=10))
             mikey = res + ".mp3"
