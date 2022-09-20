@@ -434,7 +434,7 @@ class ChatBot(Client):
        
         try:
 
-            //repeatSend()
+            ##repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
