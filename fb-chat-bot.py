@@ -511,12 +511,14 @@ class ChatBot(Client):
                 reply = "Hi, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
                 sendMsg()
-                multiThreadImg("anime-wave.gif")
+                msgids.append(self.sendLocalFiles(
+                        file_paths="anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
             elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
                 reply = "Hello, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
                 sendMsg()
-                multiThreadImg("anime-wave.gif")
+                msgids.append(self.sendLocalFiles(
+                        file_paths="anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
             elif ("matulogkana" in msg or "matutulog kana" in msg):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
