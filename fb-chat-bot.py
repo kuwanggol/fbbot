@@ -517,7 +517,8 @@ class ChatBot(Client):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
             elif ("test" == msg):
-                reply = str(self.fetchMessageInfo(mid, thread_id=None))
+                str(self.fetchMessageInfo(mid, thread_id=thread_id))
+                reply = mid
                 sendMsg()
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
