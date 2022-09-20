@@ -137,7 +137,7 @@ class ChatBot(Client):
         def texttospeech(mytext):
             global msgids
             language = 'tl'
-            myobj = gTTS(text=str(mytext) , lang=language, slow=False)
+            myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
                             string.ascii_lowercase, k=10))
             mikey = res + ".mp3"
@@ -434,7 +434,7 @@ class ChatBot(Client):
        
         try:
 
-            repeatSend()
+            //repeatSend()
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
@@ -505,10 +505,10 @@ class ChatBot(Client):
             elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
-            elif ("hello" in msg or "hello" in msg or "hlo" in msg):
-                reply = "Hi"
+            elif ("Hello" == msg or "HELLO" == msg):
+                reply = "Hi" + str(self.fetchUserInfo(*user_ids))
                 sendMsg()
-            elif ("hi" in msg):
+            elif ("hi" == msg and "Hi" == msg and "HI" == msg and "hI" == msg):
                 reply = "Hello"
                 sendMsg()
             elif ("matulogkana" in msg or "matutulog kana" in msg):
