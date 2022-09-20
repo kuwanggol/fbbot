@@ -605,7 +605,7 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onMessageSeen(self,seen_by=None, thread_id=None, thread_type=ThreadType.USER, seen_ts=None, ts=None, metadata=None, msg=None, **kwargs):
-        #reply = seen_by
+        reply = seen_by
         #msgids.append(self.send(Message(text=reply), thread_id=thread_id,
         #          thread_type=thread_type)) 
 
