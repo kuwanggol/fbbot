@@ -85,24 +85,24 @@ class ChatBot(Client):
             if (currentTime == "06:03:am"):
                 reply = "Good Morning!"
                 for idd in thread_idd:
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
                       thread_type=thread_type))
             elif (currentTime == "12:00:pm"):
                 for idd in thread_idd:
                     reply = "Good Afternoon!"
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
                       thread_type=thread_type))
             elif (currentTime == "06:03:pm"):
                 for idd in thread_idd:
                     reply = "Good Evening!"
-                    msgids.append(self.send(Message(text=reply), thread_id=idd,
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
                       thread_type=thread_type))
             
 
 
         def sendQuery():
             global msgids
-            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                       thread_type=thread_type))
         if(author_id == self.uid):
             pass
@@ -221,7 +221,7 @@ class ChatBot(Client):
                 answer = json_data["queryresult"]["pods"][1]["subpods"][2]["plaintext"]
                 answer = answer.replace("sqrt", "√")
 
-                msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
             except Exception as e:
@@ -230,7 +230,7 @@ class ChatBot(Client):
                 answer = json_data["queryresult"]["pods"][1]["subpods"][3]["plaintext"]
                 answer = answer.replace("sqrt", "√")
 
-                msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
             except Exception as e:
@@ -239,7 +239,7 @@ class ChatBot(Client):
                 answer = json_data["queryresult"]["pods"][1]["subpods"][4]["plaintext"]
                 answer = answer.replace("sqrt", "√")
 
-                msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
             except Exception as e:
@@ -248,7 +248,7 @@ class ChatBot(Client):
                 answer = json_data["queryresult"]["pods"][1]["subpods"][1]["plaintext"]
                 answer = answer.replace("sqrt", "√")
 
-                msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
             except Exception as e:
@@ -257,7 +257,7 @@ class ChatBot(Client):
                 answer = json_data["queryresult"]["pods"][1]["subpods"][0]["plaintext"]
                 answer = answer.replace("sqrt", "√")
 
-                msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
             except Exception as e:
@@ -273,7 +273,7 @@ class ChatBot(Client):
                 try:
                     answer = json_data["queryresult"]["pods"][0]["subpods"][0]["plaintext"]
                     answer = answer.replace("sqrt", "√")
-                    msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                    msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                               thread_type=thread_type))
 
                 except Exception as e:
@@ -282,7 +282,7 @@ class ChatBot(Client):
                     answer = json_data["queryresult"]["pods"][1]["subpods"][0]["plaintext"]
                     answer = answer.replace("sqrt", "√")
 
-                    msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                    msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                               thread_type=thread_type))
 
                 except Exception as e:
@@ -291,13 +291,13 @@ class ChatBot(Client):
                     answer = json_data["queryresult"]["pods"][1]["subpods"][1]["plaintext"]
                     answer = answer.replace("sqrt", "√")
 
-                    msgids.append(self.send(Message(text=answer), thread_id=thread_id,
+                    msgids.append(self.send(Message(text=answer,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                               thread_type=thread_type))
 
                 except Exception as e:
                     pass
             except:
-                msgids.append(self.send(Message(text="Cannot find the solution of this problem"), thread_id=thread_id,
+                msgids.append(self.send(Message(text="Cannot find the solution of this problem",mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
 
         try:
@@ -315,7 +315,7 @@ class ChatBot(Client):
                           for node in j[name]["users"]["nodes"]])
                 for user in users:
                     reply = f"{user.name} profile_link: {user.url}\n friend: {user.is_friend}\n"
-                    msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                               thread_type=thread_type))
         except:
             pass
