@@ -506,7 +506,8 @@ class ChatBot(Client):
                 reply = "good night🌃🌙"
                 sendMsg()
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
-                reply = "Hi" + str(self.fetchUserInfo(author_id))
+                reply = "Hi" + str(self.fetchUserInfo(f"{author_id}")[
+                            f"{author_id}"])
                 sendMsg()
             elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
                 reply = "Hello"
