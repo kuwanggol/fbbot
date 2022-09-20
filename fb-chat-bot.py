@@ -605,9 +605,9 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onMessageSeen(self,seen_by=None, thread_id=None, thread_type=ThreadType.USER, seen_ts=None, ts=None, metadata=None, msg=None, **kwargs):
-        reply = seen_by
-        msgids.append(self.send(Message(text=reply), thread_id=thread_id,
-                  thread_type=thread_type)) 
+        #reply = seen_by
+        #msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+        #          thread_type=thread_type)) 
 
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
