@@ -505,10 +505,10 @@ class ChatBot(Client):
             elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
-            elif ("Hello" == msg or "HELLO" == msg):
+            elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
                 reply = "Hi" + str(self.fetchUserInfo(*user_ids))
                 sendMsg()
-            elif ("hi" == msg and "Hi" == msg and "HI" == msg and "hI" == msg):
+            elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
                 reply = "Hello"
                 sendMsg()
             elif ("matulogkana" in msg or "matutulog kana" in msg):
