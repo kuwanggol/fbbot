@@ -492,42 +492,49 @@ class ChatBot(Client):
                 for val in msgids:
                     self.unsend(mid=str(val))
                 reply = "Di mo kita 😆"
+                texttospeech(reply)
                 sendMsg()
+                texttospeech(reply)
             elif ("haha" in msg or "lol" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
                 reply = "Medyo."
                 sendMsg()
+                texttospeech(reply)
             elif ("bye" in msg):
                 reply = "bye👋"
                 sendMsg()
+                texttospeech(reply)
             elif ("good morning" in msg):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
+                texttospeech(reply)
             elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
                 reply = "good night🌃🌙"
                 sendMsg()
+                texttospeech(reply)
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
                 reply = "Hi, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
                 sendMsg()
-                msgids.append(self.sendLocalFiles(
-                        file_paths="anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
+                texttospeech(reply)
             elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
                 reply = "Hello, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
                 sendMsg()
-                msgids.append(self.sendLocalFiles(
-                        file_paths="anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
+                texttospeech(reply)
             elif ("matulogkana" in msg or "matutulog kana" in msg):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
+                texttospeech(reply)
             elif ("test" == msg):
                 reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
                 sendMsg()
+                texttospeech(reply)
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
+                texttospeech(reply)
             #reply = msg;
             #sendMsg()
             
