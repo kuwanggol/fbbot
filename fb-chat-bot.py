@@ -506,11 +506,12 @@ class ChatBot(Client):
                 reply = "good night🌃🌙"
                 sendMsg()
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
-                reply = "Hi" + str(self.fetchUserInfo(f"{author_id}")[
-                            f"{author_id}"].user.name)
+                reply = "Hi, " + str(self.fetchUserInfo(f"{author_id}")[
+                            f"{author_id}"].name)
                 sendMsg()
             elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
-                reply = "Hello"
+                reply = "Hello, " + str(self.fetchUserInfo(f"{author_id}")[
+                            f"{author_id}"].name)
                 sendMsg()
             elif ("matulogkana" in msg or "matutulog kana" in msg):
                 reply = "Di uso ang tulog saken 😎"
