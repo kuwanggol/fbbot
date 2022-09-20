@@ -47,7 +47,7 @@ class ChatBot(Client):
         def sendMsg():
             global msgids
             if (author_id != self.uid):
-                msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                msgids.append(self.send(Message(text=reply,mentions=NOTHING, emoji_size=None, sticker=None, attachments=NOTHING, quick_replies=NOTHING, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
         
         def reactMsg(react):
