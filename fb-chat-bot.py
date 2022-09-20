@@ -510,13 +510,15 @@ class ChatBot(Client):
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
                 reply = "Hi, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
+                sendMsg()
                 msgids.append(self.sendRemoteFiles(
-                        file_urls="https://c.tenor.com/uGN3n2O03GIAAAAC/anime-wave.gif", message=reply, thread_id=thread_id, thread_type=thread_type))
+                        file_urls="https://c.tenor.com/uGN3n2O03GIAAAAC/anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
             elif ("hi" == msg or "Hi" == msg or "HI" == msg or "hI" == msg):
                 reply = "Hello, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
+                sendMsg()
                 msgids.append(self.sendRemoteFiles(
-                        file_urls="https://c.tenor.com/uGN3n2O03GIAAAAC/anime-wave.gif", message=reply, thread_id=thread_id, thread_type=thread_type))
+                        file_urls="https://c.tenor.com/uGN3n2O03GIAAAAC/anime-wave.gif", message=None, thread_id=thread_id, thread_type=thread_type))
             elif ("matulogkana" in msg or "matutulog kana" in msg):
                 reply = "Di uso ang tulog saken 😎"
                 sendMsg()
