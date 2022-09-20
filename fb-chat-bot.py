@@ -510,7 +510,7 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
-                reply = "good night🌃🌙"
+                reply = "Good night🌃🌙"
                 sendMsg()
                 texttospeech(reply)
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
