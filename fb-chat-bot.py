@@ -548,6 +548,10 @@ class ChatBot(Client):
                 reply = "Good night🌃🌙"
                 sendMsg()
                 texttospeech(reply)
+            elif ("goodevening" in msg or "good evening" in msg):
+                reply = "Good evening🌃🌙"
+                sendMsg()
+                texttospeech(reply)
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
                 reply = "Hi, " + str(self.fetchUserInfo(f"{author_id}")[
                             f"{author_id}"].name)
