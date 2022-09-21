@@ -16,6 +16,7 @@ from gtts import gTTS
 import random, string
 from datetime import datetime
 import pytz
+import base64
 
 # message_object.author for profileid
 # message_object.uid for chatid
@@ -147,6 +148,17 @@ class ChatBot(Client):
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
 
+        def uploadImg(imagePath):
+            global msgids
+            with open(imagePath, "rb") as file:
+                url = "https://api.imgbb.com/1/upload"
+                payload = {
+                "key": "bb0b2d85795f22460218c7ebcd3f1363",
+                "image": base64.b64encode(file.read()),
+                }
+                res = requests.post(url, payload)
+                reply = "Converted Image: " + str(res.text.split("display_url")[1].split('","')[0].replace('":"',""))
+                sendMsg()
 
         def removebg(imagePath):
             global msgids
@@ -163,8 +175,10 @@ class ChatBot(Client):
                     out.write(response.content)
                     if(thread_type == ThreadType.USER):
                         msgids.append(self.sendLocalFiles(file_paths=convertedimg, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        uploadImg(convertedimg)
                     elif(thread_type == ThreadType.GROUP):
                         msgids.append(self.sendLocalFiles(file_paths=convertedimg, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                        uploadImg(convertedimg)
             else:
                 print("Error:", response.status_code, response.text)
 
