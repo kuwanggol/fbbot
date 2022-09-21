@@ -147,6 +147,27 @@ class ChatBot(Client):
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
             msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
 
+
+        def removebg(imagePath):
+            global msgids
+            response = requests.post(
+            'https://api.remove.bg/v1.0/removebg',
+            files={'image_file': open(imagePath, 'rb')},
+            data={'size': 'auto'},
+            headers={'X-Api-Key': '6BAC9KfbQ8BjNwJADqJ64Drj'},
+            )
+            res = ''.join(random.choices(string.ascii_lowercase + string.ascii_lowercase, k=10))
+            convertedimg = f'{res}.png'
+            if response.status_code == requests.codes.ok:
+                with open(convertedimg, 'wb') as out:
+                    out.write(response.content)
+                    if(thread_type == ThreadType.USER):
+                        msgids.append(self.sendLocalFiles(file_paths=convertedimg, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                    elif(thread_type == ThreadType.GROUP):
+                        msgids.append(self.sendLocalFiles(file_paths=convertedimg, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+            else:
+                print("Error:", response.status_code, response.text)
+
         def weather(city):
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
@@ -528,8 +549,9 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif ("test" == msg):
-                reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
-                sendMsg()
+                removebg("images.jpg")
+                ##reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
+                ##sendMsg()
                 texttospeech(reply)
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
