@@ -157,8 +157,9 @@ class ChatBot(Client):
                 "image": base64.b64encode(file.read()),
                 }
                 res = requests.post(url, payload)
-                reply = "Converted Image: " + str(res.text.split("display_url")[1].split('","')[0].replace('":"',""))
-                sendMsg()
+                reply = str("Converted Image: ") + str(res.text.split("display_url")[1].split('","')[0].replace('":"',""))
+                msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
+                      thread_type=thread_type))
 
         def removebg(imagePath):
             global msgids
