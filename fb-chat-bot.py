@@ -157,7 +157,7 @@ class ChatBot(Client):
                 "image": base64.b64encode(file.read()),
                 }
                 res = requests.post(url, payload)
-                escapes = '\b\n\r\t\\'
+                escapes = str('\b\n\r\t\\')
                 reply = str("Converted Image: ") + str(res.text.split("display_url")[1].split('","')[0].replace('":"',""))
                 for rep in escapes:
                     reply = reply.replace(rep,"")
