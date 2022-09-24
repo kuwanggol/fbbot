@@ -157,7 +157,7 @@ class ChatBot(Client):
                 "image": base64.b64encode(file.read()),
                 }
                 res = requests.post(url, payload)
-                reply = str("Converted Image: " + str(res.json()["data"]["display_url"]))
+                reply = str(res.json()["data"]["display_url"])
                 sendMsg()
 
         def removebg(imagePath):
