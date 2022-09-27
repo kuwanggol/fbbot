@@ -687,7 +687,11 @@ class ChatBot(Client):
                   thread_type=thread_type))
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = "You just removed reaction from the message."
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"]
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} just removed reaction from the message."
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
