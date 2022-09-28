@@ -650,12 +650,15 @@ class ChatBot(Client):
 
             except:
                 pass
-    if(thread_type == ThreadType.GROUP):
-        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
-    elif(thread_type == ThreadType.USER):
-        name = "You"
+    def nameOFclient(thread_type):
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+            return name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+            return name
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = f"{name} changed the theme ✌️😎"
+        reply = f"{nameOFclient(thread_type)} changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onMessageSeen(self,seen_by=None, thread_id=None, thread_type=ThreadType.USER, seen_ts=None, ts=None, metadata=None, msg=None, **kwargs):
@@ -665,17 +668,17 @@ class ChatBot(Client):
 
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
-        reply = f"{name} Bawal ka sa iba akin kalang ✌️😎"
+        reply = f"{nameOFclient(thread_type)} Bawal ka sa iba akin kalang ✌️😎"
         #reply = removed_id + thread_id
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
-        reply = f" Hi {name}, I'm a bot to show the commands\n.help - get help about commands."
+        reply = f" Hi {nameOFclient(thread_type)}, I'm a bot to show the commands\n.help - get help about commands."
         #reply = self.fetchUserInfo(*added_ids) To know the list of return value
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = f"{name} changed the emoji 😎. Great!"
+        reply = f"{nameOFclient(thread_type)} changed the emoji 😎. Great!"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
@@ -685,18 +688,18 @@ class ChatBot(Client):
                   thread_type=thread_type))
 
     def onNicknameChange(self, mid=None, author_id=None, new_nickname=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = f"{name} just changed the nickname to {new_nickname} But why? 😁🤔😶"
+        reply = f"{nameOFclient(thread_type)} just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = f"{name} just removed reaction from the message."
+        reply = f"{nameOFclient(thread_type)} just removed reaction from the message."
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
-        reply = f"{name} just started a call 📞🎥"
+        reply = f"{nameOFclient(thread_type)} just started a call 📞🎥"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
