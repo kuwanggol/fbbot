@@ -568,8 +568,9 @@ class ChatBot(Client):
                 texttospeech(reply)
             elif ("test" == msg):
                 removebg("images.jpg")
-                ##reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
-                ##sendMsg()
+                #reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
+                reply = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+                sendMsg()
                 texttospeech(reply)
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
