@@ -667,10 +667,11 @@ class ChatBot(Client):
 
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
-        if(thread_type == ThreadType.GROUP):
-            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
-        elif(thread_type == ThreadType.USER):
-            name = "You"
+        #if(thread_type == ThreadType.GROUP):
+        #    name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        #elif(thread_type == ThreadType.USER):
+        #    name = "You"
+        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         reply = f"{name} Bawal ka sa iba akin kalang ✌️😎"
         #reply = removed_id + thread_id
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
