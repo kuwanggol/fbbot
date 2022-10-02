@@ -671,7 +671,7 @@ class ChatBot(Client):
         #    name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         #elif(thread_type == ThreadType.USER):
         #    name = "You"
-        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user
         reply = f"{name} Bawal ka sa iba akin kalang ✌️😎"
         #reply = removed_id + thread_id
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
