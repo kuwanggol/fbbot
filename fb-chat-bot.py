@@ -27,7 +27,13 @@ import base64
 #
 #
 msgids = []
-
+def nameOFclient(thread_type):
+    if(thread_type == ThreadType.GROUP):
+        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        return name
+    elif(thread_type == ThreadType.USER):
+        name = "You"
+        return name
 class ChatBot(Client):
 
 
@@ -650,13 +656,7 @@ class ChatBot(Client):
 
             except:
                 pass
-    def nameOFclient(thread_type):
-        if(thread_type == ThreadType.GROUP):
-            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
-            return name
-        elif(thread_type == ThreadType.USER):
-            name = "You"
-            return name
+    
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         reply = f"{nameOFclient(thread_type)} changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
