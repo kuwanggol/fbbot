@@ -72,10 +72,34 @@ class ChatBot(Client):
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
         def fetchThreadsMsg():
-            
+            thread_idd = []
+            arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
+            for num in range(1,len(arrayn.split("uid='"))):
+                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
+            return(thread_idd)
 
 
-        
+        def repeatSend():
+            thread_idd = list(fetchThreadsMsg())
+            timezoneDefault = pytz.timezone("Asia/Manila") 
+            timeInPH = datetime.now(timezoneDefault)
+            currentTime = timeInPH.strftime("%I:%M:%P")
+
+            if (currentTime == "06:03:am"):
+                reply = "Good Morning!"
+                for idd in thread_idd:
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
+                      thread_type=thread_type))
+            elif (currentTime == "12:00:pm"):
+                for idd in thread_idd:
+                    reply = "Good Afternoon!"
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
+                      thread_type=thread_type))
+            elif (currentTime == "06:03:pm"):
+                for idd in thread_idd:
+                    reply = "Good Evening!"
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
+                      thread_type=thread_type))
             
 
 
@@ -446,8 +470,10 @@ class ChatBot(Client):
 
        
         try:
+
+            ##repeatSend()
             self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
-            
+
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
@@ -627,31 +653,6 @@ class ChatBot(Client):
 
             except:
                 pass
-    def repeatSend():
-        thread_idd = []
-        arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-        for num in range(1,len(arrayn.split("uid='"))):
-            thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
-
-        timezoneDefault = pytz.timezone("Asia/Manila") 
-        timeInPH = datetime.now(timezoneDefault)
-        currentTime = timeInPH.strftime("%I:%M:%P")
-
-        if (currentTime == "06:03:am"):
-            reply = "Good Morning!"
-            for idd in thread_idd:
-                msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
-                  thread_type=thread_type))
-        elif (currentTime == "12:00:pm"):
-            for idd in thread_idd:
-                reply = "Good Afternoon!"
-                msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
-                  thread_type=thread_type))
-        elif (currentTime == "06:03:pm"):
-            for idd in thread_idd:
-                reply = "Good Evening!"
-                msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=idd,
-                  thread_type=thread_type))
     
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):
