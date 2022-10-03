@@ -579,7 +579,7 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif ("mikeyy" == msg):
-                reply = self.fetchUserInfo(100086019336728)
+                reply = self.fetchUserInfo("100086019336728")["100086019336728"]
                 sendMsg()
             #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
             #reply = msg;
