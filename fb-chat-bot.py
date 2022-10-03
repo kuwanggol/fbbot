@@ -571,7 +571,7 @@ class ChatBot(Client):
             elif ("test" == msg):
                 removebg("images.jpg")
                 #reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
-                reply = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+                reply = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].name
                 sendMsg()
                 texttospeech(reply)
             elif ("panget" in msg and "bot" in msg):
@@ -579,7 +579,7 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif ("mikeyy" == msg):
-                reply = self.fetchUserInfo("100086019336728")["100086019336728"]
+                reply = fetchThreadsMsg()
                 sendMsg()
             #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
             #reply = msg;
