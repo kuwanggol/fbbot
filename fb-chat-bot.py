@@ -472,7 +472,7 @@ class ChatBot(Client):
         try:
 
             ##repeatSend()
-            self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
+            ##self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
 
             if(".image" in msg):
                 if ("credit" not in msg):
