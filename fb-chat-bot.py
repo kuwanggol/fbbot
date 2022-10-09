@@ -580,7 +580,6 @@ class ChatBot(Client):
                 texttospeech(reply)
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-                if (reply):
                 #sendMsg()
                 print(reply)
                 sys.stdout.flush()
