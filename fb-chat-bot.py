@@ -471,7 +471,7 @@ class ChatBot(Client):
        
         try:
 
-            repeatSend()
+            ##repeatSend()
 
 
             if(".image" in msg):
