@@ -582,7 +582,9 @@ class ChatBot(Client):
                 texttospeech(reply)
             elif (".statusChange" == msg):
                 global msgstatus
-                ##Only Master
+                reply = "Checking... if you are my master. 😒😒"
+                sendMsg()
+                texttospeech(reply)
                 if (author_id in masterid):
                     if ( "ON" == msgstatus):
                         msgstatus = "OFF"
