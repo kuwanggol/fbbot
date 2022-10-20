@@ -12,7 +12,7 @@ import os
 import html
 import concurrent.futures
 from difflib import SequenceMatcher, get_close_matches
-from gtts import gTTS
+from gtts import gTTS, lang
 import random, string
 from datetime import datetime
 import pytz
@@ -157,10 +157,11 @@ class ChatBot(Client):
         def texttospeech(mytext):
             mikeystatus()
             global msgids
-            language = 'tl'
+            lastSpace = mytext.split(" ").pop()
+            language = "tl"
             myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
-                            string.ascii_lowercase, k=10))
+                        string.ascii_lowercase, k=10))
             mikey = res + ".mp3"
             myobj.save(mikey)
             ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
@@ -576,7 +577,7 @@ class ChatBot(Client):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
                 texttospeech(reply)
-            elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
+            elif ("goodnight" in msg or "good night" in msg):
                 reply = "Good night🌃🌙"
                 sendMsg()
                 texttospeech(reply)
@@ -617,11 +618,14 @@ class ChatBot(Client):
                         msgstatus = "ON"
                     else:
                         msgstatus = "ERROR"
+
                     reply = "Done Master!, Status: " + str(msgstatus)
                     sendMsg()
                 else:
                     reply = "You're not my master 😒"
-                    sendMsg()
+                    if (author_id != self.uid):
+                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                            thread_type=thread_type))
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
