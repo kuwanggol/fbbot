@@ -29,6 +29,7 @@ import base64
 msgids = []
 msgstatus = "ON"
 masterid = ["100078868689291","100035093511992"]
+otherbotid = ["100086019336728","100078868689291"]
 
 class ChatBot(Client):
 
@@ -578,11 +579,11 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif ("goodnight" in msg or "good night" in msg):
-                reply = "Good night🌃🌙"
+                reply = "Good night 🌃🌙"
                 sendMsg()
                 texttospeech(reply)
             elif ("goodevening" in msg or "good evening" in msg):
-                reply = "Good evening🌃🌙"
+                reply = "Good evening 🌃🌙"
                 sendMsg()
                 texttospeech(reply)
             elif ("Hello" == msg or "HELLO" == msg or "hello" == msg):
@@ -644,7 +645,7 @@ class ChatBot(Client):
 
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
         global msgids
-        if(author_id == self.uid):
+        if(author_id == self.uid or author_id in masterid or author_id in otherbotid):
             pass
         else:
             try:
