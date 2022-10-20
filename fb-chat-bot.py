@@ -560,10 +560,6 @@ class ChatBot(Client):
             elif (".unsend" == msg):
                 for val in msgids:
                     self.unsend(mid=str(val))
-                reply = "Di mo kita 😆"
-                texttospeech(reply)
-                sendMsg()
-                texttospeech(reply)
             elif ("haha" in msg or "lol" in msg):
                 reactMsg("SMILE")
             elif ("busy" in msg):
