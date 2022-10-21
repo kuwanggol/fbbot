@@ -614,7 +614,8 @@ class ChatBot(Client):
                         msgstatus = "ERROR"
 
                     reply = "Done Master!, Status: " + str(msgstatus)
-                    sendMsg()
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                            thread_type=thread_type))
                 else:
                     reply = "You're not my master 😒"
                     if (author_id != self.uid):
@@ -787,6 +788,7 @@ class ChatBot(Client):
         reply = f"New user with user_id {joined_id} has joined a call"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+
 
 cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
