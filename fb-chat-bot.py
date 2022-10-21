@@ -87,10 +87,7 @@ class ChatBot(Client):
 
         def mikeystatus():
             if("OFF" == msgstatus):
-                if (author_id in masterid):
-                    pass
-                else:
-                    raiseException()
+                raiseException()
             else:
                 pass
 
@@ -790,7 +787,6 @@ class ChatBot(Client):
         reply = f"New user with user_id {joined_id} has joined a call"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
-
 
 cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
