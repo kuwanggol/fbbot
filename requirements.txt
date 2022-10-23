@@ -3,3 +3,4 @@ wolframalpha
 requests
 gTTS
 pytz
+googletrans==3.1.0a0
