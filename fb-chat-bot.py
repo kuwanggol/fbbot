@@ -1,5 +1,23 @@
-
+from fbchat import Client, log, _graphql
+from fbchat.models import *
+import json
+import random
+import wolframalpha
+import requests
+import time
+import math
+import sqlite3
+from bs4 import BeautifulSoup
+import os
+import html
+import concurrent.futures
+from difflib import SequenceMatcher, get_close_matches
+from gtts import gTTS, lang
+import random, string
+from datetime import datetime
+import pytz
 import base64
+import googletrans
 
 # message_object.author for profileid
 # message_object.uid for chatid
@@ -41,6 +59,59 @@ class ChatBot(Client):
                 msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
         
+        def googlesearch(ToBeSearch,quant):
+            try:
+                quant = int(quant.split(" ").pop())
+                ToBeSearch = ToBeSearch.replace(str(quant),"")
+            except:
+                quant = str(quant.split(" ").pop())
+            url = "https://google.serper.dev/search"
+            payload = json.dumps({
+              "q": ToBeSearch,
+              "gl": "us",
+              "hl": "en",
+              "autocorrect": "True"
+            })
+            headers = {
+              'X-API-KEY': '835838808dd8d8c1e032da2a3169322626130910',
+              'Content-Type': 'application/json'
+            }
+            respGoogle = requests.post(url, headers=headers, data=payload)
+            mikey = respGoogle.json()
+            if (type(quant) != int):
+                for num in range(len(mikey["organic"])):
+                    try:
+                        reply = "Title: " + mikey["organic"][num]["title"] + "\n\n" + "Discription: " + mikey["organic"][num]["snippet"] + "\n\n" + "Source: " + mikey["organic"][num]["link"]
+                        print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
+                        for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
+                            reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
+                            print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
+                    except:
+                        pass
+            else:
+                for num in range(quant):
+                    try:
+                        reply = str("Title: " + mikey["organic"][num]["title"] + "\n\n" + "Discription: " + mikey["organic"][num]["snippet"] + "\n\n" + "Source: " + mikey["organic"][num]["link"])
+                        print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                              thread_type=thread_type))
+                        for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
+                            reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
+                            print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                              thread_type=thread_type))
+                    except:
+                        pass
+                
+
         def reactMsg(react):
             mikeystatus()
             if (author_id != self.uid):
@@ -241,7 +312,6 @@ class ChatBot(Client):
                         answer = answer.replace("sqrt", "√")
 
                         if(thread_type == ThreadType.USER):
-                            f
                             self.sendRemoteFiles(
                                 file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.USER)
                         elif(thread_type == ThreadType.GROUP):
@@ -431,6 +501,74 @@ class ChatBot(Client):
 
             return json_response[0]["translations"][0]["text"]
 
+        def gtranslator(ToBeTranslate):
+            try:
+                destinion = int(ToBeTranslate.split(" ").pop())
+                ToBeTranslate = ToBeTranslate.replace(str(destinion),"")
+            except:
+                destinion = str(ToBeTranslate.split(" ").pop())
+
+            translator = googletrans.Translator()
+            language = googletrans.LANGUAGES
+            if (destinion in language):
+                Translated = translator.translate(ToBeTranslate, dest=destinion).text
+                reply = Translated.replace(destinion,"")
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
+            elif (destinion == "languages"):
+                reply = str(language)
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
+            else:
+                reply = "Wrong Translation Code used!\n chat .gtranslate languages"
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
+
+        def gimageSearch(ToBeSearchImage):
+            try:
+                quant = int(ToBeSearchImage.split(" ").pop())
+                ToBeSearchImage = ToBeSearchImage.replace(str(quant),"")
+            except:
+                quant = str(ToBeSearchImage.split(" ").pop())
+            url = "https://google.serper.dev/images"
+
+            payload = json.dumps({
+                  "q": ToBeSearchImage,
+                  "gl": "us",
+                  "hl": "en",
+                  "autocorrect": False
+                    })
+            headers = {
+                  'X-API-KEY': '835838808dd8d8c1e032da2a3169322626130910',
+                  'Content-Type': 'application/json'
+                    }
+
+            mikeyImage = requests.post(url, headers=headers, data=payload).json()
+            if (type(quant) != int):
+                for num in range(len(mikeyImage["images"])):
+                    result = mikeyImage["images"][num]["imageUrl"]
+                    if(thread_type == ThreadType.USER):
+                        msgids.append(self.sendRemoteFiles(
+                            file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                    elif(thread_type == ThreadType.GROUP):
+                        msgids.append(self.sendRemoteFiles(
+                            file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+            else:
+                try:
+                    for num in range(quant):
+                        result = mikeyImage["images"][num]["imageUrl"]
+                        if(thread_type == ThreadType.USER):
+                            msgids.append(self.sendRemoteFiles(
+                                file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        elif(thread_type == ThreadType.GROUP):
+                            msgids.append(self.sendRemoteFiles(
+                                file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
+                except IndexError:
+                    print("Error")
+
         def imageSearch(self, msg):
             mikeystatus()
             try:
@@ -489,7 +627,9 @@ class ChatBot(Client):
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
-
+            elif(".gimage" in msg):
+                mytext = conSTR(msg,".gimage")
+                gimageSearch(mytext)
             elif(".progsol" in msg):
                 programming_solution(self, msg)
             elif(".translate" in msg):
@@ -523,7 +663,9 @@ class ChatBot(Client):
             elif (".say" in msg):
                 mytext = conSTR(msg,".say")
                 texttospeech(mytext)
-
+            elif(".gtranslate" in msg):
+                mytext = conSTR(msg,".gtranslate")
+                gtranslator(mytext)
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
@@ -535,7 +677,7 @@ class ChatBot(Client):
                 msg = conSTR(msg,".changenn")
                 self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
             elif (".help" in msg):
-                reply = ".image - search image online.\n.weather - {county/city}\n.say - convert text to speech.\n.solve - basic math calculation.\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
+                reply = ".gsearch - Google Search ex:{.gsearch what is bot 1}\n.gimage - Google Image Search ex:{.gimage bot 1}\n.gtranslate - Google Translate ex:{.gtranslate mahal kita en}\n\n.image - search image online ex:{.image bot 1}\n.weather - {county/city}\n.say - convert text to speech ex:{.say bot}\n.solve - basic math calculation ex:{.solve bot 1 + 1}\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
                 for val in msgids:
@@ -586,6 +728,9 @@ class ChatBot(Client):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
                 texttospeech(reply)
+            elif (".gsearch" in msg):
+                mytext = conSTR(msg,".gsearch")
+                googlesearch(mytext,mytext)
             elif (".chstatus" == msg):
                 global msgstatus
                 if (author_id in masterid):
@@ -776,9 +921,9 @@ class ChatBot(Client):
 cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
     "fr": "0NxayJuewRHQ30OX3.AWVJwIYNh0Tt8AJv6kSwDamhkoM.BiMrVd.Iu.AAA.0.0.BiMtVZ.AWXMVaiHrpQ",
-    "c_user": "100078868689291",
+    "c_user": "100085938852510",
     "datr": "xasyYs51GC0Lq5H5lvXTl5zA",
-    "xs": "31%3AuDs4Hr0vP_knlA%3A2%3A1666145705%3A-1%3A7776"
+    "xs": "14%3AO_kf13k5paffyA%3A2%3A1666537927%3A-1%3A16225"
 }
 
 
