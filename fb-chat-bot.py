@@ -1,23 +1,4 @@
-from fbchat import Client, log, _graphql
-from fbchat.models import *
-import json
-import random
-import wolframalpha
-import requests
-import time
-import math
-import sqlite3
-from bs4 import BeautifulSoup
-import os
-import html
-import concurrent.futures
-from difflib import SequenceMatcher, get_close_matches
-from gtts import gTTS, lang
-import random, string
-from datetime import datetime
-import pytz
-import base64
-import googletrans
+
 
 # message_object.author for profileid
 # message_object.uid for chatid
