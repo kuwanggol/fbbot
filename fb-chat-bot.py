@@ -895,10 +895,14 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
         if (new_nickname != "Bot" and author_id in otherbotid):
-            print("Pasok")
+            reply = "Pasok"
             self.changeNickname("Bot", user_id=author_id, thread_id=thread_id, thread_type=thread_type)
+            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=thread_type))
         else:
-            print("di napasok")
+            reply = "di napasok"
+            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=thread_type))
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):
