@@ -762,7 +762,7 @@ class ChatBot(Client):
                 
                 #print(reply)
                 #sys.stdout.flush()
-            #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
+            self.changeNickname("Bot", user_id=100078868689291, thread_id=thread_id, thread_type=thread_type)
             #reply = msg;
             #sendMsg()
             
