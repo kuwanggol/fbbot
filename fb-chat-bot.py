@@ -762,7 +762,7 @@ class ChatBot(Client):
                 
                 #print(reply)
                 #sys.stdout.flush()
-            self.changeNickname("Bot", user_id=100078868689291, thread_id=thread_id, thread_type=thread_type)
+            
             #reply = msg;
             #sendMsg()
             
@@ -894,7 +894,11 @@ class ChatBot(Client):
         reply = f"{name} just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
-
+        if (new_nickname != "Bot" and author_id in otherbotid):
+            self.changeNickname("Bot", user_id=author_id, thread_id=thread_id, thread_type=thread_type)
+        else:
+            pass
+            
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
