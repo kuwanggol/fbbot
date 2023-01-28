@@ -29,8 +29,8 @@ import googletrans
 #
 msgids = []
 msgstatus = "ON"
-masterid = ["100078868689291","100035093511992"]
-otherbotid = ["100086019336728","100078868689291"]
+masterid = ["facebookid"]
+otherbotid = ["otherbotid"]
 
 class ChatBot(Client):
 
